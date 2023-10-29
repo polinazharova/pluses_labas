@@ -1,0 +1,3 @@
+﻿  LABA TWO.cpp
+C:\Users\Полина\Desktop\LABA TWO\LABA TWO\3.h(79,8): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  LABA TWO.vcxproj -> C:\Users\Полина\Desktop\LABA TWO\x64\Debug\LABA TWO.exe
