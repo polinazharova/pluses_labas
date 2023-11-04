@@ -13,13 +13,14 @@ void by_iter(std::vector<int> v1, std::vector<std::string> v2) {
 	}
 }
 
-void by_base(std::vector<int> v1, std::vector<std::string> v2) {
+int by_base(std::vector<int> v1/*, std::vector<std::string> v2*/) {
 	for (int i{ 0 }; i < v1.size(); i++) {
 		std::cout << v1[i] << " ";
 	}
-	for (int i{ 0 }; i < v1.size(); i++) {
+	return 0;
+	/*for (int i{ 0 }; i < v1.size(); i++) {
 		std::cout << v2[i] << " ";
-	}
+	}*/
 }
 
 void range_based(std::vector<int> v1, std::vector<std::string> v2) {

@@ -1,34 +1,34 @@
 ﻿#include <iostream>
 #include <vector>
 #include <string>
+#include <ctime>
 #include "3.h"
 #include "2.h"
+#include "demo.h"
+int user_random(std::vector<int> v1);
 int main()
 {
+    std::vector<int> values;
     setlocale(LC_ALL, "RU");
-    std::vector<int> values = { 254, 0 , 0 };
+    srand(time(NULL));
+    /*std::vector<int> values = {10, 9, 8 , 7, 6 , 5, 4 , 3 ,2 ,1,0 };*/
+    /*std::vector<int> values;*/
     std::vector<std::string> names = { "РАЗ", "TWO", "THREE" };
-    /*std::cout << mean(values) << std::endl;
-    std::cout << median(values) << std::endl;
-    std::cout << moda(values) << std::endl;*/
-    by_base(values, names);
-    CoctailSort(values);
-    //std::cout << by_iter(values, names) << std::endl;
- //   int var;
- //   std::cout << "Choose the number:" << std::endl;
- //   std::cout << "1. Demo:" << std::endl;
- //   std::cout << "2. Random:" << std::endl;
- //   std::cout << "3. Your own choice:" << std::endl;
- //   std::cin >> var >> std::endl;
- //   if (var == 1) {
- //       /**/
-//    }
- //   else if (var == 2) {
-        /**/
-//    }
-//    else if (var == 3) {
-        /**/
-//    }
- //   else
-//        std::cout << "There's no choice you've entered. Close the programm and try once again."; 
+    /*std::cout << CoctailSort(values);*/
+    user_random(values);
+
+     /*by_base(values);*/
+    return 0;
+}
+
+
+
+int user_random(std::vector<int> v1) {
+    int N;
+    std::cin >> N;
+    v1.resize(N);
+    for (int i{ 0 }; i < N; i++)
+        v1[i] = rand() % 100;
+    by_base(v1);
+        return 0;
 }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 double mean(std::vector<int> v1) {
 	double mean_value = 0;
@@ -28,10 +29,11 @@ double median(std::vector<int> v1) {
 			}
 		}
 		std::cout << v1[i] << " ";
-	}
-	for (std::vector<int>::iterator i = v1.begin(); i != v1.end(); i++) {
 		symbols++;
 	}
+	/*for (std::vector<int>::iterator i = v1.begin(); i != v1.end(); i++) {
+		symbols++;
+	}*/
 	std::cout << "symbols :" << symbols << std::endl;
 	if (symbols % 2 == 0) {
 		medial = (v1[(symbols / 2) - 1] + v1[(symbols / 2)]);
@@ -70,24 +72,31 @@ double moda(std::vector<int> v1) {
 			std::cout << v1[i];
 	}
 
-	return 228;
+	return 1;
 }
 
-void CoctailSort(std::vector<int>v1) {
-	int i = 1;
-	int j = v1.size() - 1;
-	int last = v1[0];
-	int change = 0;
-	/*while (true){*/
-		for (i; i < v1.size(); i++) {
-			if (last > v1[i]) {
-				change = v1[i];
-				v1[i] = last;
-				last = change;
-				std::cout << v1[i - 1];
-			}
-			last = v1[i-1];
+int CoctailSort(std::vector<int>v1) {
+	int start = 0;
+	int finish = v1.size() - 2;
+	int dop = 0;
 
+	while (finish >= start) {
+		for (int i = start; i < v1.size() - 1; i++) {
+			if (v1[i] > v1[i + 1])
+				std::swap(v1[i], v1[i + 1]);
 		}
-	//}
+		for (int j = finish; j > dop; j--) {
+			if (v1[j] < v1[j - 1])
+				std::swap(v1[j - 1], v1[j]);
+		}
+				start++;
+		finish--;
+		dop++;
+	}
+
+	for (int f{ 0 }; f < v1.size(); f++) {
+		std::cout << v1[f] <<" ";
+	}
+
+	return 1;
 }
