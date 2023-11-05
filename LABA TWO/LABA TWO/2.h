@@ -3,6 +3,7 @@
 #include <string>
 #include <iomanip>
 
+//sort by iterator
 void by_iter(std::vector<int> v1, std::vector<std::string> v2) {
 	std::vector<int>::iterator j = v1.begin();
 	std::cout << std::setw(13) << "Name:" << "\t" << "Mark:" << std::endl;
@@ -17,6 +18,7 @@ void by_iter(std::vector<int> v1, std::vector<std::string> v2) {
 	std::cout << std::endl;
 }
 
+//basic sort
 void by_base(std::vector<int> v1, std::vector<std::string> v2) {
 	std::cout << std::setw(13)<< "Name:" << "\t" << "Mark:" << std::endl;
 	for (int i{ 0 }; i < v1.size(); i++)
@@ -24,6 +26,7 @@ void by_base(std::vector<int> v1, std::vector<std::string> v2) {
 	std::cout << std::endl;
 }
 
+//range-for-loop
 void range_based(std::vector<int> v1, std::vector<std::string> v2) {
 	
 	std::cout << std::setw(13) << "Name:" << "\t" << "Mark:" << std::endl;

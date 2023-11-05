@@ -7,8 +7,6 @@
 #include "2.h"
 
 
-
-std::vector<std::string> names_dict(200);
 int user_random(std::vector<int> v1, std::vector<std::string> v2);
 int erased(std::vector<int>& v1, std::vector<std::string>& v2);
 int added(std::vector<int>& v1, std::vector<std::string>& v2);
@@ -18,7 +16,9 @@ int user_input(std::vector<int> v1, std::vector<std::string> v2);
 
 int main()
 {
+   
     srand(time(NULL));
+    
     std::vector<int> values;
     std::vector<std::string> names;
     
@@ -46,12 +46,11 @@ int main()
             break;
     }
   
-
-  
-
     return 0;
 }
 
+
+//tak mi generiruem slovar' imen
 std::vector<std::string> dictionary() {
     std::vector<std::string> names_dict(200);
 
@@ -67,13 +66,12 @@ std::vector<std::string> dictionary() {
     for (int i{ 0 }; i < names_dict.size(); i++)
         getline(fin, names_dict[i]);
 
-
     fin.close();
     return names_dict;
 }
 
 
-
+//funkcii kotorie rabotayut ishodya iz togo chto viberet user
 int user_demo(std::vector<int> v1, std::vector<std::string> v2) {
     v1 = { 100, 100, 100, 90, 30, 80, 90, 70, 75, 51 };
     v2 = { "Polina","Margarita","Anastasia","Svetlana","Denis","Artem","Konstantin","Yulia","Lyubov","Valeria" };
@@ -135,37 +133,11 @@ int user_random(std::vector<int> v1, std::vector<std::string> v2) {
    moda(v1, v2);
    choice_adderase(v1, v2);
 
-   /*int user_choice;
-   std::cout << "You can also delete a name-mark pair or add a new one: " << std::endl;
-   std::cout << "1. Delete or add a pair." << std::endl;
-   std::cout << "2. Close the programm." << std::endl;
-   std::cout << "You're choosing: " << std::endl;
-   std::cin >> user_choice;
-   if (user_choice == 1) {
-       while (true) {
-           std::cout << "You'd like to add or delete a pair? To close the programm write any other symbol: " << std::endl;
-           std::cout << "1. Delete" << "\t"<<"2. Add"<< std::endl;
-           std::cout << " Your choice is: " << std::endl;
-           std::cin >> user_choice;
-           
-           if (user_choice == 1)
-               erased(v1, v2);
-           else if (user_choice == 2)
-               added(v1, v2);
-           else {
-               std::cout << "Thanks for using our programm! To get new analysis run it once again.";
-               break;
-           }
-       }
-   }
-   else
-       std::cout << "Thanks for using our programm! To get new analysis run it once again.";*/
-
-
         return 0;
 }
 int user_input(std::vector<int> v1, std::vector<std::string> v2) {
-    std::string add_name = "Smth";
+    
+    std::string add_name;
     int mark;
     
     while (1) {
@@ -210,6 +182,8 @@ int user_input(std::vector<int> v1, std::vector<std::string> v2) {
     return 0;
 }
 
+
+//funkcii dlya dobavleniya i udaleniya elementov
 int choice_adderase(std::vector<int>& v1, std::vector<std::string>& v2) {
     int user_choice;
     std::cout << "You can also delete a name-mark pair or add a new one: " << std::endl;

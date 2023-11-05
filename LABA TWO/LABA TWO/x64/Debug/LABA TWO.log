@@ -1,7 +1,8 @@
 ﻿  LABA TWO.cpp
-C:\Users\Полина\Desktop\LABA TWO\LABA TWO\3.h(104,13): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\Полина\Desktop\LABA TWO\LABA TWO\LABA TWO.cpp(22,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\Полина\Desktop\LABA TWO\LABA TWO\LABA TWO.cpp(63,34): warning C4101: ex: неиспользованная локальная переменная
-C:\Users\Полина\Desktop\LABA TWO\LABA TWO\LABA TWO.cpp(190,44): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
-C:\Users\Полина\Desktop\LABA TWO\LABA TWO\LABA TWO.cpp(192,41): warning C4101: ex: неиспользованная локальная переменная
+C:\Users\Полина\Desktop\LABA TWO\LABA TWO\3.h(111,13): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Полина\Desktop\LABA TWO\LABA TWO\3.h(113,18): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Полина\Desktop\LABA TWO\LABA TWO\LABA TWO.cpp(20,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\Полина\Desktop\LABA TWO\LABA TWO\LABA TWO.cpp(61,34): warning C4101: ex: неиспользованная локальная переменная
+C:\Users\Полина\Desktop\LABA TWO\LABA TWO\LABA TWO.cpp(161,44): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+C:\Users\Полина\Desktop\LABA TWO\LABA TWO\LABA TWO.cpp(163,41): warning C4101: ex: неиспользованная локальная переменная
   LABA TWO.vcxproj -> C:\Users\Полина\Desktop\LABA TWO\x64\Debug\LABA TWO.exe
