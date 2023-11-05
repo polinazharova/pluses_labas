@@ -3,7 +3,7 @@
 #include <string>
 #include <algorithm>
 
-std::vector<int> CoctailSort(std::vector<int>v1);
+std::vector<int> CoctailSort(std::vector<int>&v1);
 std::vector<std::string> dictionary();
 
 double mean(std::vector<int> v1) {
@@ -11,10 +11,9 @@ double mean(std::vector<int> v1) {
 	for (std::vector<int>::iterator i = v1.begin(); i != v1.end(); i++) {
 		mean_value += *i;
 	}
-	std::cout << "mean value :" << mean_value << std::endl;
 	mean_value = mean_value / v1.size();
-
-	return mean_value;
+	std::cout << "Mean = " << mean_value << std::endl;
+	return 0;
 }
 
 double median(std::vector<int> v1) {
@@ -33,21 +32,23 @@ double median(std::vector<int> v1) {
 
 	//}
 	
-	v1 = CoctailSort(v1);
+	CoctailSort(v1);
 	if (v1.size() % 2 == 0) {
 		medial = (v1[(v1.size() / 2) - 1] + v1[(v1.size() / 2)]);
 		medial = medial / 2;
-		return medial;
+		std::cout << "Median = " << medial << std::endl;
+		return 0;
 	}
 	else {
 		medial = v1[((v1.size() + 1) / 2) - 1];
-		return medial;
+		std::cout << "Median = " << medial << std::endl;
+		return 0;
 	}
 
 }
 
 // работает для любой моды
-double moda(std::vector<int> v1) {
+double moda(std::vector<int>v1, std::vector<std::string> v2) {
 	std::vector<int> amount(v1.size(), 1);
 
 
@@ -77,18 +78,28 @@ double moda(std::vector<int> v1) {
 	}
 	if(max * is_there_moda == amount.size()){
 		std::cout << "There's no moda. Each number repeats itself equal amount of times." << std::endl;
-		return true;
+		return 0;
 	}
-
+	std::cout << "Moda numbers and names: " << std::endl;
 	for (int i{ 0 }; i < amount.size(); i++) {
-		if (amount[i] == max)
-			std::cout<<v1[i]<<" ";
+		if (amount[i] == max) {
+			std::cout << v1[i] << " - ";
+			std::cout << v2[i] << " ";
+			for (int j{ i + 1 }; j < v2.size(); j++) {
+				if (v1[j] == v1[i])
+					std::cout << v2[j] << " ";
+			}
+			std::cout << std::endl;
+		}
+		
 	}
-	std::cout <<"Repeats = " << max;
-	return 0;
+	
+	
+	std::cout <<"Repeats = " << max<<std::endl;
+	return 1;
 }
 
-std::vector<int> CoctailSort(std::vector<int>v1) {
+std::vector<int> CoctailSort(std::vector<int>&v1) {
 	int start = 0;
 	int finish = v1.size() - 2;
 	int dop = 0;
@@ -112,7 +123,7 @@ std::vector<int> CoctailSort(std::vector<int>v1) {
 
 
 
-bool moda_names(std::vector<std::string> v1) {
+int moda_names(std::vector<std::string> v1) {
 	
 	std::vector<int> amount(v1.size(), 1);
 
@@ -136,9 +147,8 @@ bool moda_names(std::vector<std::string> v1) {
 	}
 	
 	if (max > 1)
-		return false;
+		return 0;
 	else
-		return true;
+		return 1;
 
 }
-	

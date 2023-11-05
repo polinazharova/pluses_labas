@@ -20,9 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="demo.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="2.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
