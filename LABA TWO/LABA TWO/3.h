@@ -4,7 +4,6 @@
 #include <algorithm>
 
 std::vector<int> CoctailSort(std::vector<int>&v1);
-std::vector<std::string> dictionary();
 
 //tut i skazat' nechego
 double mean(std::vector<int> v1) {

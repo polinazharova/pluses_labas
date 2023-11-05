@@ -5,7 +5,7 @@
 #include <fstream>
 #include "3.h"
 #include "2.h"
-
+#define pass (void)0
 
 int user_random(std::vector<int> v1, std::vector<std::string> v2);
 int erased(std::vector<int>& v1, std::vector<std::string>& v2);
@@ -87,10 +87,10 @@ int user_demo(std::vector<int> v1, std::vector<std::string> v2) {
 int user_random(std::vector<int> v1, std::vector<std::string> v2) {
     int N;
     
-    std::cout << "Put the amount of people to analyze their marks: ";
+    std::cout << "Put the amount of people to analyze their marks. ";
+    std::cout << "This amount must be 1-200: ";
     std::cin >> N;
-    std::cout << std::endl;
-
+    
 
     if (N <= 40 && N > 0) {
         v1.resize(N);
@@ -126,6 +126,10 @@ int user_random(std::vector<int> v1, std::vector<std::string> v2) {
         for (int i{ 0 }; i < N; i++)
             v1[i] = rand() % 101;
     }
+    else {
+        std::cout << "Uncorrect number. Please try once again. This amount must be 1 - 200.";
+        return 0;
+    }
 
    range_based(v1, v2);
    mean(v1);
@@ -139,6 +143,8 @@ int user_input(std::vector<int> v1, std::vector<std::string> v2) {
     
     std::string add_name;
     int mark;
+    std::cout << "Names must be real and written in letters like this." << std::endl;
+    std::cout << "Marks must be in range 0-100." << std::endl << std::endl;
     
     while (1) {
         
@@ -157,10 +163,12 @@ int user_input(std::vector<int> v1, std::vector<std::string> v2) {
             std::cout << "Mark: ";
             std::cin >> mark;
            
-            try {
-                (mark >= 0 && mark <= 100) == true;
-            }
-            catch(const std::exception& ex){
+            //ya ne smogla korrektno otlovit' situaciyu kogda vvodyatsya letters vmesto digits,
+            //ni s pomosh'yu try/catch, ni s if/else
+         
+            if (mark >= 0 && mark <= 100)
+                pass;
+            else{
                 std::cout << "A mark must be a number ranged 0-100. Run the programm again to try one more time.";
                 return 0;
             }
