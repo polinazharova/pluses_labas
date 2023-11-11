@@ -1,0 +1,18 @@
+﻿  LABA ONE.cpp
+C:\Users\polin\OneDrive\Рабочий стол\LABA ONE\LABA ONE\1.h(15,32): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\polin\OneDrive\Рабочий стол\LABA ONE\LABA ONE\1.h(17,30): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\polin\OneDrive\Рабочий стол\LABA ONE\LABA ONE\extra task.h(20,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\polin\OneDrive\Рабочий стол\LABA ONE\LABA ONE\extra task.h(149,34): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\polin\OneDrive\Рабочий стол\LABA ONE\LABA ONE\extra task.h(276,17): warning C4244: =: преобразование "double" в "_Ty", возможна потеря данных
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\polin\OneDrive\Рабочий стол\LABA ONE\LABA ONE\extra task.h(290,28): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\polin\OneDrive\Рабочий стол\LABA ONE\LABA ONE\extra task.h(292,29): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\polin\OneDrive\Рабочий стол\LABA ONE\LABA ONE\extra task.h(156): warning C4715: O: значение возвращается не при всех путях выполнения
+  LABA ONE.vcxproj -> C:\Users\polin\OneDrive\Рабочий стол\LABA ONE\LABA ONE\x64\Debug\LABA ONE.exe
