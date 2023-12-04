@@ -1,101 +1,111 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
 
-class Company {
+//класс грузовых автомобилей
+class Truck {
 private:
-
-    std::string name;
-    int creation_date;
-    std::string owner;
+    //атрибуты
+    int mass;
+    double load_capacity;
+    double horse_power;
 
 public:
 
-
-    void setCompanyName(std::string name) {
-        this->name = name;
-    }
-    void setCompanyCreationDate(int creation_date) {
-        this->creation_date = creation_date;
-    }
-    void setCompanyOwner(std::string owner) {
-        this->owner = owner;
-    }
-
-    void getCompanyInfo() {
-
-        std::cout << "Название компании: " << name << std::endl;
-        std::cout << "Год основания: " << creation_date << std::endl;
-        std::cout << "Владелец: " << owner << std::endl;
-
-    }
-
-    Company(std::string name, int creation_date, std::string owner) :
-        name{ name }, creation_date{ creation_date }, owner{ owner }
+    //конструкторы, используется из которых по факту толькой дефолтный
+    //я хотела придумать какую-нибудь реализацию с использованием конструкторов, но пока что не знаю как
+    //так что во всех классах конструкторы не играют роли (кроме дефолтных)
+    Truck(int mass, double load_capacity, double horse_power) : mass(mass), load_capacity(load_capacity), horse_power(horse_power)
     {
     }
 
-    Company() : name{ "POLINA ZHAROVA CORP." }, creation_date{ 2023 }, owner{ "Polina Zharova" }
+    Truck() : mass(0), load_capacity(0), horse_power(0)
     {
-        std::cout << "Информация о компании выбрана по умолчанию." << std::endl;
     }
 
+    //сеттеры геттеры
+    void getTruckInfo() {
+
+        std::cout << "Масса: " << mass << " кг" << std::endl;
+        std::cout << "Грузоподъемность: " << load_capacity << " кг" << std::endl;
+        std::cout << "Л.С.: " << horse_power << std::endl;
+
+    }
+
+    void setTruckInfo() {
+
+        int mass;
+        double load_capacity, horse_power;
+
+        std::cout << "Масса: ";
+        std::cin >> mass;
+        this->mass = mass;
+
+        std::cout << "Грузоподъемность: ";
+        std::cin >> load_capacity;
+        this->load_capacity = load_capacity;
+        std::cout << "Л.С.: ";
+
+        std::cin >> horse_power;
+        this->horse_power = horse_power;
+        std::cin.ignore();
+
+    }
 };
 
-class Employee : public Company {
-
+//класс легковых автомобилей
+class Car{
 private:
-
-    std::string name;
-    std::string gender;
-    int age;
-    std::string residence;
+    //атрибуты
+    std::string transmission;
+    std::string price_category;
+    std::string color;
 
 public:
-
-    void setEmployeename(std::string name) {
-        this->name = name;
-    }
-    void setEmployeeGender(std::string gender) {
-        this->gender = gender;
-    }
-    void setEmployeeAge(int age) {
-        this->age = age;
-    }
-    void setEmployeeRes(std::string residence) {
-        this->residence = residence;
-    }
-
-
-    void getEmployeeInfo() {
-
-        std::cout << "Имя: " << name << std::endl;
-        std::cout << "Пол: " << gender << std::endl;
-        std::cout << "Возраст: " << age << std::endl;
-        std::cout << "Место жительства: " << residence << std::endl;
-
-    }
-
-    Employee(std::string Cname, int creation_date, std::string owner,
-        std::string name, std::string gender, int age, std::string residence) : Company(Cname, creation_date, owner)
+    //конструкторы
+    Car(std::string transmission, std::string price_category, std::string color) : 
+        transmission{ transmission }, price_category{ price_category }, color{ color }
     {
-        this->name = name;
-        this->gender = gender;
-        this->residence = residence;
     }
 
-    Employee() :
-        name{ "Иван Иванов" }, gender{ "М" }, age{ 30 }, residence{ "Анадырь" }
+    Car() : transmission{ "NONE" }, price_category{ "NONE" }, color{ "NONE" }
     {
-        std::cout << "Информация о сотруднике выбрана по умолчанию." << std::endl;
     }
 
+    //сеттеры геттеры
+    void getCarInfo() {
 
+        std::cout << "Трансмиссия: " << transmission << std::endl;
+        std::cout << "Ценовая категория: " << price_category << std::endl;
+        std::cout << "Цвет: " << color << std::endl;
+    }
+
+    void setCarInfo() {
+
+        std::string transmission, price_category, color;
+
+        std::cout << "Трансмиссия: ";
+        std::cin >> transmission;
+        this->transmission = transmission;
+
+        std::cout << "Ценовая категория: ";
+        std::cin >> price_category;
+        this->price_category = price_category;
+
+        std::cin.ignore();
+        std::cout << "Цвет: ";
+        std::getline(std::cin, color);
+        this->color = color;
+
+    }
+   
 };
 
-class Vehicle : public Employee {
+//класс транспорта, который является наследником классов легкового и грузового автомобилей
+class Vehicle : public Car, public Truck {
 private:
-
+    //атрибуты
     std::string registration_number;
     std::string brand;
     int release_year;
@@ -103,25 +113,17 @@ private:
 
 public:
 
-    Vehicle(std::string registration_number, std::string brand, int release_year, int price,
-        std::string Cname, int creation_date, std::string owner, std::string Ename,
-        std::string gender, int age, std::string residence) : Employee(Cname, creation_date, owner, Ename,
-            gender, age, residence)
-
+    Vehicle(std::string registration_number, std::string brand, int release_year, int price) :
+        registration_number{ registration_number }, brand{ brand }, release_year{ release_year }, price{ price }
     {
-        this->registration_number = registration_number;
-        this->brand = brand;
-        this->release_year = release_year;
-        this->price = price;
     }
 
     Vehicle() :
         registration_number{ "A117VO" }, brand{ "BMW" }, release_year{ 2017 }, price{ 1000000 }
     {
-        std::cout << "Информация о ТС выбрана по умолчанию." << std::endl;
     }
 
-
+    //сеттеры и геттеры
     void setVehicleRegnum(std::string registration_number) {
         this->registration_number = registration_number;
     }
@@ -135,6 +137,9 @@ public:
         this->price = price;
     }
 
+    int getVehiclePrice() { return price; }
+
+
     void getVehicleInfo() {
 
         std::cout << "Регистрационный номер: " << registration_number << std::endl;
@@ -143,103 +148,260 @@ public:
         std::cout << "Цена: " << price << std::endl;
 
     }
+    
+    void setVehicleInfo() {
+
+        std::string registration_number, brand;
+        int release_year, price;
+
+        std::cout << "Регистрационный номер: ";
+        std::cin >> registration_number;
+        this->registration_number = registration_number;
+
+        std::cout << "Марка авто: ";
+        std::cin >> brand;
+        this->brand = brand;
+
+        std::cout << "Год выпуска: ";
+        std::cin >> release_year;
+        this->release_year = release_year;
+
+        std::cout << "Цена: ";
+        std::cin >> price;
+        this->price = price;
+
+    }
+        
+    
 
 };
 
-class Truck : public Vehicle {
-private:
+//класс сотрудников, который включает в себя объект класса транспортного средства (имеет связь с другим классом)
+class Employee {
 
-    double mass;
-    double load_capacity;
-    double horse_power;
+private:
+    //атрибуты
+    std::string name;
+    std::string gender;
+    int age;
+    std::string residence;
+    Vehicle v;
 
 public:
+    //сеттеры и геттеры
+     void setEmployeename(std::string name) {
+         this->name = name;
+     }
+     void setEmployeeGender(std::string gender) {
+         this->gender = gender;
+     }
+     void setEmployeeAge(int age) {
+         this->age = age;
+     }
+     void setEmployeeRes(std::string residence) {
+         this->residence = residence;
+     }
+     std::string getEmployeeName() { return name; }
 
-    Truck(double mass, double load_capacity, double horse_power, std::string Cname, int creation_date, std::string owner,
-        std::string registration_number, std::string brand, int release_year, int price,
-        std::string Ename, std::string gender, int age, std::string residence) : Vehicle(registration_number, brand, release_year, price, Cname,
-            creation_date, owner, Ename, gender, age, residence)
-    {
-        this->mass = mass;
-        this->load_capacity = load_capacity;
-        this->horse_power = horse_power;
-    }
+     void setEmployeeInfo() {
 
-    Truck() : mass(3000 + rand() % 5001), load_capacity(1000 + rand() % 2501), horse_power(210 + rand() % 51)
-    {
-        std::cout << "Информация о грузовом автомобиле выбрана по умолчанию." << std::endl;
-    }
+         std::string name, gender, residence;
+         int age;
+
+         std::cin.ignore();
+         std::cout << "Имя сотрудника: ";
+         std::getline(std::cin, name);
+         this->name = name;
+
+         std::cout << "Пол: ";
+         std::cin >> gender;
+         this->gender = gender;
+
+         std::cin.ignore();
+         std::cout << "Место жительства: ";
+         std::getline(std::cin, residence);
+         this->residence = residence;
+
+         std::cout << "Возраст: ";
+         std::cin >> age;
+         this->age = age;
+
+     }
+     void getEmployeeInfo() {
+
+         std::cout << "Имя: " << name << std::endl;
+         std::cout << "Пол: " << gender << std::endl;
+         std::cout << "Возраст: " << age << std::endl;
+         std::cout << "Место жительства: " << residence << std::endl;
+
+     }
+
+     //конструкторы
+     Employee(std::string name, std::string gender, int age, std::string residence) :
+         name{ name }, gender{ gender }, age{ age }, residence{ residence }
+       {
+       }
+
+     Employee() : name{ "Иван Иванов" }, gender{ "М" }, age{ 30 }, residence{ "Анадырь" }
+       {
+       }
+      
+     //функции, связывающие класс транспорта с этим
+     void set_car_info() { v.setCarInfo(); } 
+     void set_truck_info() { v.setTruckInfo(); }   
+     void set_vehicle_info() { v.setVehicleInfo(); }        
+     void get_car_info() { v.getCarInfo(); }      
+     void get_truck_info() { v.getTruckInfo(); }       
+     void get_vehicle_info() { v.getVehicleInfo(); }
+     int v_price() { return v.getVehiclePrice(); }
 
 
-    void load_capacity_category() {
-
-    }
-
-    void horses_to_kilowatts() {
-
-    }
-
-    void getTruckInfo() {
-
-        std::cout << "Масса: " << mass << " кг" << std::endl;
-        std::cout << "Грузоподъемность: " << load_capacity << " кг" << std::endl;
-        std::cout << "Л.С.: " << horse_power << std::endl;
-
-    }
-
-    void getallInfo() {
-
-        getCompanyInfo();
-        getEmployeeInfo();
-        getVehicleInfo();
-        getTruckInfo();
-
-    }
 };
 
-class Car : public Vehicle {
+//класс компании, который включает в себя массив объектов класс сотрудник, как бы подразумевая, что в компании множество сотрудников
+class Company {
 private:
-
-    std::string transmission;
-    std::string price_category;
-    std::string color;
+    //атрибуты
+    std::string name;
+    int creation_date;
+    std::string owner;
+    int N;
+    Employee* e = new Employee[N];
 
 public:
+    //сеттеры и геттеры
+    void setCompanyName(std::string name) {
+        this->name = name;
+    }
+    void setCompanyCreationDate(int creation_date) {
+        this->creation_date = creation_date;
+    }
+    void setCompanyOwner(std::string owner) {
+        this->owner = owner;
+    }
+    void setCompanyInfo() {
 
-    Car(std::string transmission, std::string price_category, std::string color,
-        std::string Cname, int creation_date, std::string owner,
-        std::string registration_number, std::string brand, int release_year, int price,
-        std::string Ename, std::string gender, int age, std::string residence) : Vehicle(registration_number, brand, release_year, price, Cname,
-            creation_date, owner, Ename, gender, age, residence)
+        std::string name, owner;
+        int creation_date;
 
+        std::cin.ignore();
+        std::cout << "Название компании: ";
+        std::getline(std::cin, name);
+        this->name = name;
+
+        std::cout << "Дата основания: ";
+        std::cin >> creation_date;
+        this->creation_date = creation_date;
+
+        std::cin.ignore();
+        std::cout << "Имя владельца: ";
+        std::getline(std::cin, owner);
+        this->owner = owner;
+
+    }
+    void getCompanyInfo() {
+
+        std::cout << "Название компании: " << name << std::endl;
+        std::cout << "Год основания: " << creation_date << std::endl;
+        std::cout << "Владелец: " << owner << std::endl;
+
+    }
+
+    //конструкторы
+    Company(int N) : N{ N }
     {
-        this->transmission = transmission;
-        this->price_category = price_category;
-        this->color = color;
+        int choice;
+        setCompanyInfo();
+
+        for (int i {0}; i < N; i++) {
+
+            std::cout << "Cотрудник " << i + 1 << std::endl;
+            e[i].setEmployeeInfo();
+
+            std::cout << "Вы владеете грузовым (нажмите 1) или легковым автомобилем (нажмите 2)? ";
+            std::cin >> choice;
+
+            switch (choice) {
+            case 1:
+                e[i].set_truck_info();
+                break;
+            case 2:
+                e[i].set_car_info();
+                break;
+            default:
+                if ((1 + rand() % 2) == 1)
+                    e[i].set_truck_info();
+                else
+                    e[i].set_car_info();
+                break;
+            }
+            e[i].set_vehicle_info();     
+        }
     }
 
-    Car() :
-        transmission{ "Автоматическая" }, price_category{ "Люкс" }, color{ "Синий" }
+    Company(std::string name, int creation_date, std::string owner, int N) :
+        name{ name }, creation_date{ creation_date }, owner{ owner }, N{ N }
     {
-        std::cout << "Информация о грузовом автомобиле выбрана по умолчанию." << std::endl;
+        int choice;
+     
+        for (int i{ 0 }; i < N; i++) {
+
+            std::cout << "Cотрудник " << i + 1 << std::endl;
+            e[i].setEmployeeInfo();
+
+            std::cout << "Вы владеете грузовым (нажмите 1) или легковым автомобилем (нажмите 2)? ";
+            std::cin >> choice;
+
+            switch (choice) {
+            case 1:
+                e[i].set_truck_info();
+                break;
+            case 2:
+                e[i].set_car_info();
+                break;
+            default:
+                if ((1 + rand() % 2) == 1)
+                    e[i].set_truck_info();
+                else
+                    e[i].set_car_info();
+                break;
+            }
+            e[i].set_vehicle_info();
+        }
     }
 
-
-    void getCarInfo() {
-
-        std::cout << "Трансмиссия: " << transmission << std::endl;
-        std::cout << "Ценовая категория: " << price_category << std::endl;
-        std::cout << "Цвет: " << color << std::endl;
-    }
-
-
-    void getallInfo() {
-
+    Company() : name{ "POLINA ZHAROVA CORP." }, creation_date{ 2023 }, owner{ "Polina Zharova" }, N{1}
+    {
         getCompanyInfo();
-        getEmployeeInfo();
-        getVehicleInfo();
-        getCarInfo();
-
+        e[0].getEmployeeInfo();
+        e[0].get_vehicle_info();
+        e[0].get_car_info();
+        e[0].get_truck_info();
     }
 
+    //функция для интерактивности программы
+    void thief_finding() {
+
+        std::vector<std::string> suspects;
+
+        for (int i{ 0 }; i < N; i++) {
+            if (e[i].v_price() >= 1000000)
+                suspects.push_back(e[i].getEmployeeName());
+        }
+
+        std::cout << "Есть тут у нас кое-какие подозрения..." << std::endl;
+
+        if (suspects.size() == 0) 
+            std::cout << "ШУТКА!!! Подозрений нет :)))" << std::endl;
+        else {
+            for (int i{ 0 }; i < suspects.size(); i++)
+                std::cout << suspects[i] << " ";
+            std::cout << std::endl;
+        }
+   
+    }
+    //удаление динамического массива
+    void deleting() {
+        delete[] e;
+    }
 };
