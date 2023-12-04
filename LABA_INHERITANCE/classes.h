@@ -3,10 +3,10 @@
 #include <string>
 #include <vector>
 
-//класс грузовых автомобилей
+//class truckov
 class Truck {
 private:
-    //атрибуты
+    //attributes
     int mass;
     double load_capacity;
     double horse_power;
@@ -23,7 +23,7 @@ public:
     {
     }
 
-    //сеттеры геттеры
+    //setters getters
     void getTruckInfo() {
 
         std::cout << "Масса: " << mass << " кг" << std::endl;
@@ -53,16 +53,16 @@ public:
     }
 };
 
-//класс легковых автомобилей
+//class car'ov
 class Car{
 private:
-    //атрибуты
+    //attributes
     std::string transmission;
     std::string price_category;
     std::string color;
 
 public:
-    //конструкторы
+    //constructors
     Car(std::string transmission, std::string price_category, std::string color) : 
         transmission{ transmission }, price_category{ price_category }, color{ color }
     {
@@ -72,7 +72,7 @@ public:
     {
     }
 
-    //сеттеры геттеры
+    //setters getters
     void getCarInfo() {
 
         std::cout << "Трансмиссия: " << transmission << std::endl;
@@ -101,10 +101,11 @@ public:
    
 };
 
-//класс транспорта, который является наследником классов легкового и грузового автомобилей
+
+//klass transporta, kotoriy yavlyaetsya naslednikom klassov legkovogo i gruzovogo avtomobiley
 class Vehicle : public Car, public Truck {
 private:
-    //атрибуты
+    //attributes
     std::string registration_number;
     std::string brand;
     int release_year;
@@ -122,7 +123,7 @@ public:
     {
     }
 
-    //сеттеры и геттеры
+    //setters and getters
     void setVehicleRegnum(std::string registration_number) {
         this->registration_number = registration_number;
     }
@@ -175,11 +176,11 @@ public:
 
 };
 
-//класс сотрудников, который включает в себя объект класса транспортного средства (имеет связь с другим классом)
+//class sotrudnikov, kotoriy vklyuchaet v sebya object classa vehicle (imeet s nim svyaz')
 class Employee {
 
 private:
-    //атрибуты
+    //attributes
     std::string name;
     std::string gender;
     int age;
@@ -187,7 +188,7 @@ private:
     Vehicle v;
 
 public:
-    //сеттеры и геттеры
+    //setters and getters
      void setEmployeename(std::string name) {
          this->name = name;
      }
@@ -235,7 +236,7 @@ public:
 
      }
 
-     //конструкторы
+     //constructors
      Employee(std::string name, std::string gender, int age, std::string residence) :
          name{ name }, gender{ gender }, age{ age }, residence{ residence }
        {
@@ -245,7 +246,7 @@ public:
        {
        }
       
-     //функции, связывающие класс транспорта с этим
+     //functions svyazivayushie class transporta s etim
      void set_car_info() { v.setCarInfo(); } 
      void set_truck_info() { v.setTruckInfo(); }   
      void set_vehicle_info() { v.setVehicleInfo(); }        
@@ -257,10 +258,11 @@ public:
 
 };
 
-//класс компании, который включает в себя массив объектов класс сотрудник, как бы подразумевая, что в компании множество сотрудников
+//class companii, vklyuchaet v sebya massiv ojbectov classa Employee
+//to est' u kompanii ne odin sotrudnik
 class Company {
 private:
-    //атрибуты
+    //attributes
     std::string name;
     int creation_date;
     std::string owner;
@@ -268,7 +270,7 @@ private:
     Employee* e = new Employee[N];
 
 public:
-    //сеттеры и геттеры
+    //setters and getters
     void setCompanyName(std::string name) {
         this->name = name;
     }
@@ -306,7 +308,7 @@ public:
 
     }
 
-    //конструкторы
+    //constructors
     Company(int N) : N{ N }
     {
         int choice;
@@ -378,7 +380,7 @@ public:
         e[0].get_truck_info();
     }
 
-    //функция для интерактивности программы
+    //function dlya interaktivnosti programmi
     void thief_finding() {
 
         std::vector<std::string> suspects;
@@ -399,7 +401,7 @@ public:
         }
    
     }
-    //удаление динамического массива
+    //dynamic massiv deleting
     void deleting() {
         delete[] e;
     }

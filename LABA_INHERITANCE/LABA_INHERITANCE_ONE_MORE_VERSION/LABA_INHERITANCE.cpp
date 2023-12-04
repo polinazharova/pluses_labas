@@ -1,6 +1,6 @@
 ﻿#include "classes.h"
 
-
+//сначала я написала эту программу, она рабочая, но ее архитектура довольно странна... но, наверное, имеет место быть
 void car_choosing() {
     std::string transmission, price_category, color, registration_number, brand, Ename, gender, residence, Cname, owner;
     int release_year, price, age, creation_date;
