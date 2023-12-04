@@ -1,292 +1,125 @@
-﻿#include <iostream>
-#include <string>
-
-class Company {
-private:
-
-    std::string Cname;
-    int creation_date;
-    std::string owner;
-
-public:
+﻿#include "classes.h"
 
 
-    void setCompanyName(std::string Cname) {
-        this->Cname = Cname;
-    }
-    void setCompanyCreationDate(int creation_date) {
-        this->creation_date = creation_date;
-    }
-    void setCompanyOwner(std::string owner) {
-        this->owner = owner;
-    }
+void car_choosing() {
+    std::string transmission, price_category, color, registration_number, brand, Ename, gender, residence, Cname, owner;
+    int release_year, price, age, creation_date;
 
-    void getCompanyInfo() {
+    std::cout << "Трансмиссия: ";
+    std::cin >> transmission;
 
-        std::cout << "Название компании: " << Cname << std::endl;
-        std::cout << "Год основания: " << creation_date << std::endl;
-        std::cout << "Владелец: " << owner << std::endl;
+    std::cout << "Ценовая категория: ";
+    std::cin >> price_category;
 
-    }
+    std::cout << "Цвет: ";
+    std::cin >> color;
 
-    Company(std::string name, int creation_date, std::string owner) :
-        Cname{ Cname }, creation_date{ creation_date }, owner{ owner }
-    {
-    }
-
-    Company() : Cname{ "POLINA ZHAROVA CORP." }, creation_date{ 2023 }, owner{ "Polina Zharova" }
-    {
-    }
-    void Cset_all();
-};
-
-void Company::Cset_all() {
-
-    std::string Cname;
-    std::cout << "Введите название компании: ";
-    std::getline(std::cin, Cname);
-    setCompanyName(Cname);
-
-    int creation_date;
-    std::cout << "Введите год основания компании: ";
-    std::cin >> creation_date;
-    setCompanyCreationDate(creation_date);
-
-    std::string owner;
-    std::cout << "Введите имя и фамилию владельца: ";
-    std::getline(std::cin, owner);
-    setCompanyOwner(owner);
-
-}
-
-
-class Employee : public Company {
-
-private:
-
-    std::string Ename;
-    std::string gender;
-    int age;
-    std::string residence;
-
-public:
-
-    void setEmployeeName(std::string Ename) {
-        this->Ename = Ename;
-    }
-    void setEmployeeGender(std::string gender) {
-        this->gender = gender;
-    }
-    void setEmployeeAge(int age) {
-        this->age = age;
-    }
-    void setEmployeeRes(std::string residence) {
-        this->residence = residence;
-    }
-
-
-    void getPersonInfo() {
-
-        std::cout << "Имя: " << Ename << std::endl;
-        std::cout << "Пол: " << gender << std::endl;
-        std::cout << "Возраст: " << age << std::endl;
-        std::cout << "Место жительства: " << residence << std::endl;
-
-    }
-
-    Employee(std::string Ename, std::string gender, int age, std::string residence) :
-        Ename{ Ename }, gender{ gender }, age{ age }, residence{ residence }
-    {
-    }
-
-    Employee() :
-        Ename{ "Иван Иванов"}, gender{ "М" }, age{ 30 }, residence{ "Анадырь" }
-    {
-    }
-
-    void Eset_all();
-};
-
-void Employee::Eset_all() {
-
-    std::string Ename;
-    std::cout << "Введите имя и фамилию: ";
-    std::getline(std::cin, Ename);
-    setEmployeeName(Ename); 
-
-    std::string gender;
-    std::cout << "Введите пол: ";
-    std::cin >> gender;
-    setEmployeeGender(gender);
-
-    int age;
-    std::cout << "Введите возраст: ";
-    std::cin >> age;
-    setEmployeeAge(age);
-
-    std::string residence;
-    std::cout << "Введите место жительства: ";
-    std::getline(std::cin, residence);
-    setEmployeeRes(residence);
-
-}
-
-
-class Vehicle : public Employee {
-private:
-
-    std::string registration_number;
-    std::string brand;
-    int release_year;
-    int price;
-
-public:
-
-    Vehicle(std::string registration_number, std::string brand, int release_year, int price) :
-        registration_number{ registration_number }, brand{ brand }, release_year{ release_year }, price{ price }
-    {
-    }
-
-    Vehicle() :
-        registration_number{ "A117VO" }, brand{ "BMW" }, release_year{ 2017 }, price { 1000000 }
-    {
-    }
-
-  
-    void setVehicleRegnum(std::string registration_number) {
-        this->registration_number = registration_number;
-    }
-    void setVehicleBrand(std::string brand) {
-        this->brand = brand;
-    }
-    void setVehicleYear(int release_year) {
-        this->release_year = release_year;
-    }
-    void setVehiclePrice(int price) {
-        this->price = price;
-    }
-
-    void getVehicleInfo() {
-
-        std::cout << "Регистрационный номер: " << registration_number << std::endl;
-        std::cout << "Марка авто: " << brand << std::endl;
-        std::cout << "Год производства: " << release_year << std::endl;
-        std::cout << "Цена: " << price << std::endl;
-
-    }
-
-    void Vset_all();
-
-};
-
-void Vehicle::Vset_all() {
-
-    std::string registration_number;
     std::cout << "Введите регистрационный номер машины: ";
     std::cin >> registration_number;
-    setVehicleRegnum(registration_number);
 
-    std::string brand;
     std::cout << "Введите марку машины: ";
     std::cin >> brand;
-    setVehicleBrand(brand);
 
-    int release_year;
     std::cout << "Введите год выпуска машины: ";
     std::cin >> release_year;
-    setVehicleYear(release_year);
 
-    int price;
     std::cout << "Введите цену машины: ";
     std::cin >> price;
-    setVehiclePrice(price);
 
+    std::cin.ignore();
+    std::cout << "Введите имя и фамилию владельца машины: ";
+    std::getline(std::cin, Ename);
+
+    std::cin.ignore();
+    std::cout << "Введите пол владельца машины: ";
+    std::cin >> gender;
+
+    std::cout << "Введите возраст владельца машины: ";
+    std::cin >> age;
+
+    std::cin.ignore();
+    std::cout << "Введите место жительства владельца машины: ";
+    std::getline(std::cin, residence);
+
+    std::cin.ignore();
+    std::cout << "Введите название компании: ";
+    std::getline(std::cin, Cname);
+    std::cin.ignore();
+    std::cout << "Введите год основания компании: ";
+    std::cin >> creation_date;
+
+    std::cin.ignore();
+    std::cout << "Введите имя и фамилию владельца компании: ";
+    std::getline(std::cin, owner);
+
+    Car c(transmission, price_category, color,
+        Cname, creation_date, owner,
+        registration_number, brand, release_year, price,
+        Ename, gender, age, residence);
 }
+void truck_choosing() {
+
+    std::string registration_number, brand, Ename, gender, residence, Cname, owner;
+    int release_year, price, age, creation_date;
+    double mass, load_capacity, horse_power;
+
+    std::cout << "Масса: ";
+    std::cin >> mass;
 
 
-class Truck : public Vehicle {
-private:
-
-    double mass;
-    double load_capacity;
-    double horse_power;
-
-public:
-
-    Truck(double mass, double load_capacity, double horse_power) :
-        mass{ mass }, load_capacity{ load_capacity }, horse_power{ horse_power } 
-    {
-        Vset_all();
-        Eset_all();
-        Cset_all();
-    }
-
-    //Truck() : mass{ 7000 + (rand() % 3000)}, load_capacity{2500 + (rand() % 1500)}, horse_power{200 + (rand() % 51)}
-    //{
-    //    Vset_all();
-    //    Eset_all();
-    //    Cset_all();
-    //}
-    
-    void change() {
-        Vset_all();
-        Eset_all();
-        Cset_all();
-    }
-
-    void load_capacity_category() {
-
-    }
-
-    void horses_to_kilowatts() {
-
-    }
-
-    void getTruckInfo() {
-
-        std::cout << "Масса: " << mass << " кг" << std::endl;
-        std::cout << "Грузоподъемность: " << load_capacity << " кг" << std::endl;
-        std::cout << "Л.С.: " << horse_power  << std::endl;
-
-    }
-};
-
-class Car : public Vehicle {
-private:
-
-    std::string transmission;
-    std::string price_category;
-    std::string color;
-
-public:
-    
-    Car(std::string transmission, std::string price_category, std::string color) : 
-        transmission{ transmission }, price_category{ price_category }, color{ color }
-    {
-    }
-
-    Car() :
-        transmission{ "Автоматическая" }, price_category{ "Люкс" }, color{ "Синий" }
-    {
-    }
-
-    void change() {
-        Vset_all();
-        Eset_all();
-        Cset_all();
-    }
-
-    void getCarInfo() {
-
-        std::cout << "Трансмиссия: " << transmission << std::endl;
-        std::cout << "Ценовая категория: " << price_category << std::endl;
-        std::cout << "Цвет: " << color << std::endl;
-    }
-
-};
+    std::cout << "Грузоподъемность: ";
+    std::cin >> load_capacity;
 
 
+    std::cout << "Л.С.: ";
+    std::cin >> horse_power;
 
+    std::cout << "Введите регистрационный номер машины: ";
+    std::cin >> registration_number;
+
+
+    std::cout << "Введите марку машины: ";
+    std::cin >> brand;
+
+    std::cout << "Введите год выпуска машины: ";
+    std::cin >> release_year;
+
+
+    std::cout << "Введите цену машины: ";
+    std::cin >> price;
+
+    std::cin.ignore();
+    std::cout << "Введите имя и фамилию владельца машины: ";
+    std::getline(std::cin, Ename);
+
+    std::cin.ignore();
+    std::cout << "Введите пол владельца машины: ";
+    std::cin >> gender;
+
+
+    std::cout << "Введите возраст владельца машины: ";
+    std::cin >> age;
+
+    std::cin.ignore();
+    std::cout << "Введите место жительства владельца машины: ";
+    std::getline(std::cin, residence);
+
+    std::cin.ignore();
+    std::cout << "Введите название компании: ";
+    std::getline(std::cin, Cname);
+    std::cin.ignore();
+    std::cout << "Введите год основания компании: ";
+    std::cin >> creation_date;
+
+    std::cin.ignore();
+    std::cout << "Введите имя и фамилию владельца компании: ";
+    std::getline(std::cin, owner);
+
+    Truck t(mass, load_capacity, horse_power,
+        Cname, creation_date, owner,
+        registration_number, brand, release_year, price,
+        Ename, gender, age, residence);
+}
 
 
 int main()
@@ -294,6 +127,55 @@ int main()
     setlocale(LC_ALL, "rus");
     srand(time(NULL));
 
-    Car c;
+    //предисловие
+    std::cout << "Здравствуйте! Нами было проведено расследование, в котором было выяснено," << std::endl;
+    std::cout << "что какой-то сотрудник одной из наших дочерних компаний крадет канцелярию с рабочего места." << std::endl;
+    std::cout << "Теперь каждый работник всех принадлежащих нам организаций обязан ввести данные о себе, о том," << std::endl;
+    std::cout << "в какой именно из наших компаний он работает, а также - самое главное - данные о своем транспортном средстве." << std::endl;
+    std::cout << "Да, именно по тому, на какой машине вы ездете, мы определим, вы ли своровали в прошлом месяце 7 ручек и пачку бумаги или нет." << std::endl;
+    std::cout << "Вы можете посмотреть демонстрационный вариант с автоматически сгенерированными значениями," << std::endl;
+    std::cout << "чтобы увидеть, какая информация нам требуется. " << std::endl<<std::endl;
+
+    int choice;
+    std::cout << "Вы можете воспользоваться данными по умолчанию (нажмите 1) или ввести собственные (нажмите 2): ";
+    std::cin >> choice;
+    
+    switch (choice)
+    {
+    case 1:
+        choice = 1 + rand() % 2;
+        if (choice == 1) {
+            Car c;
+            c.getallInfo();
+        }
+        else{
+            Truck t;
+            t.getallInfo();
+        }
+        break;
+
+    case 2:
+        std::cout << "Вы владеете легковым автомобилем (нажмите 1) или грузовым (нажмите 2)?";
+        std::cin >> choice;
+        if (choice == 1) {
+            Car c;
+            c.getallInfo();
+        }
+        else if (choice == 2) {
+            Truck t;
+            t.getallInfo();
+        }
+        else {
+            std::cout << "Такого варианта не было...";
+        }
+        break;
+            
+    default:
+        std::cout << "Такого варианта не было...";
+        break;
+    }
+   
+    return 0;
+
 }
 
