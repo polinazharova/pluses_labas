@@ -3,8 +3,6 @@
 #include <string>
 #include <vector>
 
-
-
 //класс грузовых автомобилей
 class Truck {
 private:
@@ -76,10 +74,11 @@ public:
 
     //сеттеры геттеры
     void getCarInfo() {
-        setlocale(LC_ALL, "ru");
+
         std::cout << "Трансмиссия: " << transmission << std::endl;
         std::cout << "Ценовая категория: " << price_category << std::endl;
         std::cout << "Цвет: " << color << std::endl;
+
     }
 
     void setCarInfo() {
