@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+
+
 //класс грузовых автомобилей
 class Truck {
 private:
@@ -12,7 +14,6 @@ private:
     double horse_power;
 
 public:
-
     //конструкторы, используется из которых по факту толькой дефолтный
     //я хотела придумать какую-нибудь реализацию с использованием конструкторов, но пока что не знаю как
     //так что во всех классах конструкторы не играют роли (кроме дефолтных)
@@ -75,7 +76,7 @@ public:
 
     //сеттеры геттеры
     void getCarInfo() {
-
+        setlocale(LC_ALL, "ru");
         std::cout << "Трансмиссия: " << transmission << std::endl;
         std::cout << "Ценовая категория: " << price_category << std::endl;
         std::cout << "Цвет: " << color << std::endl;
@@ -97,7 +98,6 @@ public:
         std::cout << "Цвет: ";
         std::getline(std::cin, color);
         this->color = color;
-
     }
    
 };
