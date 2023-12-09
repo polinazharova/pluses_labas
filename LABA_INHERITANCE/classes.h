@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,9 +12,9 @@ private:
     double horse_power;
 
 public:
-    //конструкторы, используется из которых по факту толькой дефолтный
-    //я хотела придумать какую-нибудь реализацию с использованием конструкторов, но пока что не знаю как
-    //так что во всех классах конструкторы не играют роли (кроме дефолтных)
+    //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂС‹, РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РёР· РєРѕС‚РѕСЂС‹С… РїРѕ С„Р°РєС‚Сѓ С‚РѕР»СЊРєРѕР№ РґРµС„РѕР»С‚РЅС‹Р№
+    //СЏ С…РѕС‚РµР»Р° РїСЂРёРґСѓРјР°С‚СЊ РєР°РєСѓСЋ-РЅРёР±СѓРґСЊ СЂРµР°Р»РёР·Р°С†РёСЋ СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРѕРІ, РЅРѕ РїРѕРєР° С‡С‚Рѕ РЅРµ Р·РЅР°СЋ РєР°Рє
+    //С‚Р°Рє С‡С‚Рѕ РІРѕ РІСЃРµС… РєР»Р°СЃСЃР°С… РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂС‹ РЅРµ РёРіСЂР°СЋС‚ СЂРѕР»Рё (РєСЂРѕРјРµ РґРµС„РѕР»С‚РЅС‹С…)
     Truck(int mass, double load_capacity, double horse_power) : mass(mass), load_capacity(load_capacity), horse_power(horse_power)
     {
     }
@@ -26,9 +26,9 @@ public:
     //setters getters
     void getTruckInfo() {
 
-        std::cout << "Масса: " << mass << " кг" << std::endl;
-        std::cout << "Грузоподъемность: " << load_capacity << " кг" << std::endl;
-        std::cout << "Л.С.: " << horse_power << std::endl;
+        std::cout << "РњР°СЃСЃР°: " << mass << " РєРі" << std::endl;
+        std::cout << "Р“СЂСѓР·РѕРїРѕРґСЉРµРјРЅРѕСЃС‚СЊ: " << load_capacity << " РєРі" << std::endl;
+        std::cout << "Р›.РЎ.: " << horse_power << std::endl;
 
     }
 
@@ -37,20 +37,25 @@ public:
         int mass;
         double load_capacity, horse_power;
 
-        std::cout << "Масса: ";
+        std::cout << "РњР°СЃСЃР°: ";
         std::cin >> mass;
         this->mass = mass;
 
-        std::cout << "Грузоподъемность: ";
+        std::cout << "Р“СЂСѓР·РѕРїРѕРґСЉРµРјРЅРѕСЃС‚СЊ: ";
         std::cin >> load_capacity;
         this->load_capacity = load_capacity;
-        std::cout << "Л.С.: ";
+        std::cout << "Р›.РЎ.: ";
 
         std::cin >> horse_power;
         this->horse_power = horse_power;
         std::cin.ignore();
 
     }
+
+    void mileage() {
+        std::cout << "РџСЂРѕР±РµРі: " << 0 + rand() % 100000 << " С‚С‹СЃ. РєРј." << std::endl;
+    }
+
 };
 
 //class car'ov
@@ -75,9 +80,9 @@ public:
     //setters getters
     void getCarInfo() {
 
-        std::cout << "Трансмиссия: " << transmission << std::endl;
-        std::cout << "Ценовая категория: " << price_category << std::endl;
-        std::cout << "Цвет: " << color << std::endl;
+        std::cout << "РўСЂР°РЅСЃРјРёСЃСЃРёСЏ: " << transmission << std::endl;
+        std::cout << "Р¦РµРЅРѕРІР°СЏ РєР°С‚РµРіРѕСЂРёСЏ: " << price_category << std::endl;
+        std::cout << "Р¦РІРµС‚: " << color << std::endl;
 
     }
 
@@ -85,20 +90,24 @@ public:
 
         std::string transmission, price_category, color;
 
-        std::cout << "Трансмиссия: ";
+        std::cout << "РўСЂР°РЅСЃРјРёСЃСЃРёСЏ: ";
         std::cin >> transmission;
         this->transmission = transmission;
 
-        std::cout << "Ценовая категория: ";
+        std::cout << "Р¦РµРЅРѕРІР°СЏ РєР°С‚РµРіРѕСЂРёСЏ: ";
         std::cin >> price_category;
         this->price_category = price_category;
 
         std::cin.ignore();
-        std::cout << "Цвет: ";
+        std::cout << "Р¦РІРµС‚: ";
         std::getline(std::cin, color);
         this->color = color;
     }
    
+    void technical_inspection() {
+        std::cout << "РўРµС…. РѕСЃРјРѕС‚СЂ Р°РІС‚Рѕ РїСЂРѕРІРѕРґРёР»СЃСЏ РІ " << 2015 + rand() % 9 << " РіРѕРґСѓ" << std::endl;
+    }
+
 };
 
 
@@ -114,14 +123,21 @@ private:
 public:
 
     Vehicle(std::string registration_number, std::string brand, int release_year, int price) :
-        registration_number{ registration_number }, brand{ brand }, release_year{ release_year }, price{ price }
-    {
-    }
-
+        registration_number{ registration_number }, brand{ brand }, release_year{ release_year }, price{ price } {}
+    
     Vehicle() :
-        registration_number{ "A117VO" }, brand{ "BMW" }, release_year{ 2017 }, price{ 1000000 }
-    {
-    }
+        registration_number{ "A117VO" }, brand{ "BMW" }, release_year{ 2017 }, price{ 1000000 } {}
+
+    //t.k. roditel'skie klassi u menya truck i car, to constructors ya delayu dlya vehicle
+    Vehicle(std::string transmission, std::string price_category, std::string color) : Car(transmission, price_category, color),
+        registration_number{ "A117VO" }, brand{ "BMW" }, release_year{ 2017 }, price{ 1000000 } {}
+
+    Vehicle(int mass, double load_capacity, double horse_power) : Truck(mass, load_capacity, horse_power),
+        registration_number{ "A117VO" }, brand{ "BMW" }, release_year{ 2017 }, price{ 1000000 } {}
+  
+    Vehicle(std::string transmission, std::string price_category, std::string color, int mass, double load_capacity, double horse_power) : Truck(mass, load_capacity, horse_power), 
+        Car(transmission, price_category, color),
+        registration_number{ "A117VO" }, brand{ "BMW" }, release_year{ 2017 }, price{ 1000000 } {}
 
     //setters and getters
     void setVehicleRegnum(std::string registration_number) {
@@ -142,10 +158,10 @@ public:
 
     void getVehicleInfo() {
 
-        std::cout << "Регистрационный номер: " << registration_number << std::endl;
-        std::cout << "Марка авто: " << brand << std::endl;
-        std::cout << "Год производства: " << release_year << std::endl;
-        std::cout << "Цена: " << price << std::endl;
+        std::cout << "Р РµРіРёСЃС‚СЂР°С†РёРѕРЅРЅС‹Р№ РЅРѕРјРµСЂ: " << registration_number << std::endl;
+        std::cout << "РњР°СЂРєР° Р°РІС‚Рѕ: " << brand << std::endl;
+        std::cout << "Р“РѕРґ РїСЂРѕРёР·РІРѕРґСЃС‚РІР°: " << release_year << std::endl;
+        std::cout << "Р¦РµРЅР°: " << price << std::endl;
 
     }
     
@@ -154,25 +170,65 @@ public:
         std::string registration_number, brand;
         int release_year, price;
 
-        std::cout << "Регистрационный номер: ";
+        std::cout << "Р РµРіРёСЃС‚СЂР°С†РёРѕРЅРЅС‹Р№ РЅРѕРјРµСЂ: ";
         std::cin >> registration_number;
         this->registration_number = registration_number;
 
-        std::cout << "Марка авто: ";
+        std::cout << "РњР°СЂРєР° Р°РІС‚Рѕ: ";
         std::cin >> brand;
         this->brand = brand;
 
-        std::cout << "Год выпуска: ";
+        std::cout << "Р“РѕРґ РІС‹РїСѓСЃРєР°: ";
         std::cin >> release_year;
         this->release_year = release_year;
 
-        std::cout << "Цена: ";
+        std::cout << "Р¦РµРЅР°: ";
         std::cin >> price;
         this->price = price;
 
     }
         
-    
+    void determinant_of_beauty() {
+        std::cout << "РЎРµР№С‡Р°СЃ РЅР°С€Р° РЅРµР№СЂРѕСЃРµС‚СЊ РѕРїСЂРµРґРµР»РёС‚ СѓСЂРѕРІРµРЅСЊ РєСЂР°СЃРѕС‚С‹ РІР°С€РµРіРѕ Р°РІС‚РѕРјРѕР±РёР»СЏ." << std::endl;
+
+        int non_tricky_choosing, beautiful = 0, av_beautiful = 0, nonbeautiful = 0;
+        std::vector<std::string> beauty;
+
+        for (int i{ 0 }; i < 10; i++) {
+            non_tricky_choosing = 1 + rand() % 3;
+            switch (non_tricky_choosing)
+            {
+            case 1:
+                beauty.push_back("РєСЂР°СЃРёРІРѕ");
+                break;
+            case 2:
+                beauty.push_back("СЃСЂРµРґРЅРµ");
+                break;
+            case 3:
+                beauty.push_back("РЅРµРєСЂР°СЃРёРІРѕ");
+                break;
+            default:
+                break;
+            }
+            if (beauty[i] == "РєСЂР°СЃРёРІРѕ")
+                beautiful++;
+            else if (beauty[i] == "СЃСЂРµРґРЅРµ")
+                av_beautiful++;
+            else
+                nonbeautiful++;
+
+            if (i == 9) {
+                if (beautiful > av_beautiful && beautiful > nonbeautiful)
+                    std::cout << "РџРѕ РјРЅРµРЅРёСЋ РЅР°С€РµРіРѕ СѓРјРЅРѕРіРѕ Р°РІС‚РѕРјР°С‚РёР·РёСЂРѕРІР°РЅРЅРѕРіРѕ РѕС†РµРЅРёРІР°С‚РµР»СЏ Р°РІС‚РѕРјРѕР±РёР»РµР№ РІР°С€Рµ Р°РІС‚Рѕ...РєСЂР°СЃРёРІРѕ." << std::endl;
+                else if(av_beautiful > nonbeautiful && av_beautiful > beautiful)
+                    std::cout << "РџРѕ РјРЅРµРЅРёСЋ РЅР°С€РµРіРѕ СѓРјРЅРѕРіРѕ Р°РІС‚РѕРјР°С‚РёР·РёСЂРѕРІР°РЅРЅРѕРіРѕ РѕС†РµРЅРёРІР°С‚РµР»СЏ Р°РІС‚РѕРјРѕР±РёР»РµР№ РІР°С€Рµ Р°РІС‚Рѕ...СЃСЂРµРґРЅСЏС‡РѕРє." << std::endl;
+                else if(nonbeautiful > av_beautiful && nonbeautiful > beautiful)
+                    std::cout << "РџРѕ РјРЅРµРЅРёСЋ РЅР°С€РµРіРѕ СѓРјРЅРѕРіРѕ Р°РІС‚РѕРјР°С‚РёР·РёСЂРѕРІР°РЅРЅРѕРіРѕ РѕС†РµРЅРёРІР°С‚РµР»СЏ Р°РІС‚РѕРјРѕР±РёР»РµР№ РІР°С€Рµ Р°РІС‚Рѕ...РЅРµРєСЂР°СЃРёРІРѕ" << std::endl;
+                else
+                    std::cout << "РљСЂР°СЃРѕС‚Сѓ РІР°С€РµРіРѕ Р°РІС‚Рѕ РЅРµРІРѕР·РјРѕР¶РЅРѕ РѕРїСЂРµРґРµР»РёС‚СЊ... Р­С‚Рѕ РІРµРґСЊ РІРєСѓСЃРѕРІС‰РёРЅР°! :)" << std::endl;
+            }
+        }
+    }
 
 };
 
@@ -209,30 +265,30 @@ public:
          int age;
 
          std::cin.ignore();
-         std::cout << "Имя сотрудника: ";
+         std::cout << "РРјСЏ СЃРѕС‚СЂСѓРґРЅРёРєР°: ";
          std::getline(std::cin, name);
          this->name = name;
 
-         std::cout << "Пол: ";
+         std::cout << "РџРѕР»: ";
          std::cin >> gender;
          this->gender = gender;
 
          std::cin.ignore();
-         std::cout << "Место жительства: ";
+         std::cout << "РњРµСЃС‚Рѕ Р¶РёС‚РµР»СЊСЃС‚РІР°: ";
          std::getline(std::cin, residence);
          this->residence = residence;
 
-         std::cout << "Возраст: ";
+         std::cout << "Р’РѕР·СЂР°СЃС‚: ";
          std::cin >> age;
          this->age = age;
 
      }
      void getEmployeeInfo() {
 
-         std::cout << "Имя: " << name << std::endl;
-         std::cout << "Пол: " << gender << std::endl;
-         std::cout << "Возраст: " << age << std::endl;
-         std::cout << "Место жительства: " << residence << std::endl;
+         std::cout << "РРјСЏ: " << name << std::endl;
+         std::cout << "РџРѕР»: " << gender << std::endl;
+         std::cout << "Р’РѕР·СЂР°СЃС‚: " << age << std::endl;
+         std::cout << "РњРµСЃС‚Рѕ Р¶РёС‚РµР»СЊСЃС‚РІР°: " << residence << std::endl;
 
      }
 
@@ -242,11 +298,11 @@ public:
        {
        }
 
-     Employee() : name{ "Иван Иванов" }, gender{ "М" }, age{ 30 }, residence{ "Анадырь" }
+     Employee() : name{ "РРІР°РЅ РРІР°РЅРѕРІ" }, gender{ "Рњ" }, age{ 30 }, residence{ "РђРЅР°РґС‹СЂСЊ" }
        {
        }
       
-     //functions svyazivayushie class transporta s etim
+     //functions svyazivayushie class vehicle s etim
      void set_car_info() { v.setCarInfo(); } 
      void set_truck_info() { v.setTruckInfo(); }   
      void set_vehicle_info() { v.setVehicleInfo(); }        
@@ -254,6 +310,7 @@ public:
      void get_truck_info() { v.getTruckInfo(); }       
      void get_vehicle_info() { v.getVehicleInfo(); }
      int v_price() { return v.getVehiclePrice(); }
+     void determinant_of_beauty() { v.determinant_of_beauty(); }
 
 
 };
@@ -286,26 +343,24 @@ public:
         int creation_date;
 
         std::cin.ignore();
-        std::cout << "Название компании: ";
+        std::cout << "РќР°Р·РІР°РЅРёРµ РєРѕРјРїР°РЅРёРё: ";
         std::getline(std::cin, name);
         this->name = name;
 
-        std::cout << "Дата основания: ";
+        std::cout << "Р”Р°С‚Р° РѕСЃРЅРѕРІР°РЅРёСЏ: ";
         std::cin >> creation_date;
         this->creation_date = creation_date;
 
         std::cin.ignore();
-        std::cout << "Имя владельца: ";
+        std::cout << "РРјСЏ РІР»Р°РґРµР»СЊС†Р°: ";
         std::getline(std::cin, owner);
         this->owner = owner;
 
     }
     void getCompanyInfo() {
-
-        std::cout << "Название компании: " << name << std::endl;
-        std::cout << "Год основания: " << creation_date << std::endl;
-        std::cout << "Владелец: " << owner << std::endl;
-
+        std::cout << "РќР°Р·РІР°РЅРёРµ РєРѕРјРїР°РЅРёРё: " << name << std::endl;
+        std::cout << "Р“РѕРґ РѕСЃРЅРѕРІР°РЅРёСЏ: " << creation_date << std::endl;
+        std::cout << "Р’Р»Р°РґРµР»РµС†: " << owner << std::endl;
     }
 
     //constructors
@@ -316,10 +371,10 @@ public:
 
         for (int i {0}; i < N; i++) {
 
-            std::cout << "Cотрудник " << i + 1 << std::endl;
+            std::cout << "CРѕС‚СЂСѓРґРЅРёРє " << i + 1 << std::endl;
             e[i].setEmployeeInfo();
 
-            std::cout << "Вы владеете грузовым (нажмите 1) или легковым автомобилем (нажмите 2)? ";
+            std::cout << "Р’С‹ РІР»Р°РґРµРµС‚Рµ РіСЂСѓР·РѕРІС‹Рј (РЅР°Р¶РјРёС‚Рµ 1) РёР»Рё Р»РµРіРєРѕРІС‹Рј Р°РІС‚РѕРјРѕР±РёР»РµРј (РЅР°Р¶РјРёС‚Рµ 2)? ";
             std::cin >> choice;
 
             switch (choice) {
@@ -347,10 +402,10 @@ public:
      
         for (int i{ 0 }; i < N; i++) {
 
-            std::cout << "Cотрудник " << i + 1 << std::endl;
+            std::cout << "CРѕС‚СЂСѓРґРЅРёРє " << i + 1 << std::endl;
             e[i].setEmployeeInfo();
 
-            std::cout << "Вы владеете грузовым (нажмите 1) или легковым автомобилем (нажмите 2)? ";
+            std::cout << "Р’С‹ РІР»Р°РґРµРµС‚Рµ РіСЂСѓР·РѕРІС‹Рј (РЅР°Р¶РјРёС‚Рµ 1) РёР»Рё Р»РµРіРєРѕРІС‹Рј Р°РІС‚РѕРјРѕР±РёР»РµРј (РЅР°Р¶РјРёС‚Рµ 2)? ";
             std::cin >> choice;
 
             switch (choice) {
@@ -390,10 +445,10 @@ public:
                 suspects.push_back(e[i].getEmployeeName());
         }
 
-        std::cout << "Есть тут у нас кое-какие подозрения..." << std::endl;
+        std::cout << "Р•СЃС‚СЊ С‚СѓС‚ Сѓ РЅР°СЃ РєРѕРµ-РєР°РєРёРµ РїРѕРґРѕР·СЂРµРЅРёСЏ..." << std::endl;
 
         if (suspects.size() == 0) 
-            std::cout << "ШУТКА!!! Подозрений нет :)))" << std::endl;
+            std::cout << "РЁРЈРўРљРђ!!! РџРѕРґРѕР·СЂРµРЅРёР№ РЅРµС‚ :)))" << std::endl;
         else {
             for (int i{ 0 }; i < suspects.size(); i++)
                 std::cout << suspects[i] << " ";
@@ -401,8 +456,13 @@ public:
         }
    
     }
-    //dynamic massiv deleting
-    void deleting() {
-        delete[] e;
+
+    void average_salary() {
+        std::cout << "РЎСЂРµРґРЅРёР№ СѓСЂРѕРІРµРЅСЊ Р·Р°СЂРїР»Р°С‚ РїРѕ РєРѕРјРїР°РЅРёРё - " << 19242 + rand() % 150000 << std::endl;
     }
+
+    void determinant_of_beauty(int i) { e[i-1].determinant_of_beauty(); }
+
+    //dynamic massiv deleting
+    void deleting() { delete[] e; }
 };
