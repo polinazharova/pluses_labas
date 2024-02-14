@@ -1,6 +1,1 @@
-﻿  LABA TWO.cpp
-C:\Users\Полина\Documents\GitHub\pluses_labas\LABA TWO\LABA TWO\3.h(110,13): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\Полина\Documents\GitHub\pluses_labas\LABA TWO\LABA TWO\3.h(112,18): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\Полина\Documents\GitHub\pluses_labas\LABA TWO\LABA TWO\LABA TWO.cpp(20,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\Полина\Documents\GitHub\pluses_labas\LABA TWO\LABA TWO\LABA TWO.cpp(61,34): warning C4101: ex: неиспользованная локальная переменная
-  LABA TWO.vcxproj -> C:\Users\Полина\Documents\GitHub\pluses_labas\LABA TWO\x64\Debug\LABA TWO.exe
+﻿  LABA TWO.vcxproj -> C:\Users\polin\OneDrive\Документы\LABAS\pluses_labas\LABA TWO\x64\Debug\LABA TWO.exe
