@@ -1,216 +1,126 @@
-﻿#include <iostream>
-
-class Matrix {
-private:
-    unsigned int m;
-    unsigned int n;
-    int **data = new int*[n];
-
-public:
-    Matrix() : n(3), m(3) 
-    {
-        for (int i{ 0 }; i < n; i++) 
-            data[i] = new int[m];
-        
-    }
-    Matrix(unsigned int n, unsigned int m) : n(n), m(m)
-    {
-        for (int i{ 0 }; i < n; i++)
-            data[i] = new int[m];
-
-    }
-
-    ~Matrix() {
-        std::cout << "Destruction." << std::endl;
-        for (int i{ 0 }; i < n; i++) {
-            delete[] data[i];
-            data[i] = nullptr;
-        }
-        delete[] data;
-        data = nullptr;
-    }
-
-    void filling() {
-        int choice;
-        std::cout << "Choose what to fill the matrix with: " << std::endl;
-        std::cout << "1 - RANDOM FILLING." << std::endl;
-        std::cout << "2 - UNIT FILLING." << std::endl;
-        std::cout << "3 - CUSTOM FILLING." << std::endl;
+﻿#include "Matrix.h"
+    
+void multiply(Matrix& first, Matrix& second) {
+    Matrix& mult = first * second;
+    std::cout << "Получившаяся матрица: " << std::endl;
+    mult << "  |  ";
+    delete& mult;
+}
+void minus(Matrix& first, Matrix& second) {
+    Matrix& subs = first - second;
+    std::cout << "Получившаяся матрица: " << std::endl;
+    subs << " | ";
+    delete& subs;
+}
+void elemChanging(Matrix& matrix, unsigned int elem) {
+    unsigned int choice;
+    try {
+        matrix[elem];
+        std::cout << "Ваш элемент: " << matrix[elem] << std::endl;
+        std::cout << "Введите элемент на который вы хотите его заменить: ";
         std::cin >> choice;
-        switch (choice) {
-        case 1:
-            for (int i{ 0 }; i < n; i++) {
-                for (int j{ 0 }; j < m; j++)
-                    data[i][j] = rand() % 10;
-            }
-            break;
-        case 2:
-            for (int i{ 0 }; i < n; i++) {
-                for (int j{ 0 }; j < m; j++) {
-                    if (j == i)
-                        data[i][j] = 1;
-                    else
-                        data[i][j] = 0;
-
-                }
-            }
-            break;
-        case 3: {
-            unsigned int element;
-            for (int i{ 0 }; i < n; i++) {
-                for (int j{ 0 }; j < m; j++) {
-                    std::cout << "Put in the element of " << i + 1 << " row " << j + 1 << " column: ";
-                    std::cin >> element;
-                    data[i][j] = element;
-                }
-            }
-            break;
-        }
-
-        default:
-            std::cout << "There was no such choice. The numbers will be randomized.";
-            for (int i{ 0 }; i < n; i++) {
-                for (int j{ 0 }; j < m; j++)
-                    data[i][j] = rand() % 10;
-            }
-            break;
-        }
+        matrix[elem] = choice;
+        std::cout << "Ваша новая матрица: " << std::endl;
+        matrix << " | ";
     }
-
-    int& operator [] (unsigned int num) {
-        if (num >= n * m || num < 0)
-            std::cout << "ERROR! INDEX IS NOT EXISTED!" << std::endl;
-        else {
-            return data[num/m][num%m];
-        }
+    catch (std::string& error) {
+        std::cout << error << std::endl;
     }
-    
-    void operator << (std::string gap) {
-        for (int i{ 0 }; i < n; i++) {
-            for (int j{ 0 }; j < m; j++)
-                std::cout << data[i][j] << gap;
-            std::cout << std::endl;
-        }
-    }
-
-    Matrix& operator + (const Matrix& other) {
-        if (n != other.n || m != other.m)
-            std::cout << "CANNOT BE DONE. MATRIXES STRINGS OR COLLUMNS AREN'T EQUAL!" << std::endl;
-        else {
-            Matrix* demo = new Matrix(n,m);
-            for (int i{ 0 }; i < n; i++) {
-                for (int j{ 0 }; j < m; j++)
-                    (*demo).data[i][j] = data[i][j] + other.data[i][j];
-            }
-            return *demo;
-        }
-    }
-
-
-    Matrix& operator - (const Matrix& other) {
-        if (n != other.n || m != other.m)
-            std::cout << "CANNOT BE DONE. MATRIXES STRINGS OR COLLUMNS AREN'T EQUAL!" << std::endl;
-        else {
-            Matrix* demo = new Matrix(n,m);
-            for (int i{ 0 }; i < n; i++) {
-                for (int j{ 0 }; j < m; j++)
-                    (*demo).data[i][j] = data[i][j] - other.data[i][j];
-            }
-            return *demo;
-        }
-    }
-
-    Matrix& operator * (Matrix& other) {
-        if (m != other.n)
-            std::cout << "CANNOT BE DONE!" << std::endl;
-        else {
-            Matrix* demo = new Matrix(n, other.m);
-            unsigned int temp{ 0 };
-            for (int i{ 0 }; i < m; i++) {
-                for (int j{ 0 }; j < m; j++) {
-                    for (int k{ 0 }; k < m; k++) {
-                        temp += data[j][k] * other.data[k][i];
-                    }
-                    (*demo).data[j][i] = temp;
-                    temp = 0;
-                }
-           }
-            std::cout << demo << std::endl;
-            return *demo;
-        }
-    }
-
-    void operator += (Matrix& other) {
-        if (n != other.n || m != other.m)
-            std::cout << "CANNOT BE DONE. MATRIXES STRINGS OR COLLUMNS AREN'T EQUAL!" << std::endl;
-        else {
-            for (int i{ 0 }; i < n; i++) {
-                for (int j{ 0 }; j < m; j++)
-                    data[i][j] += other.data[i][j];
-            }
-        }
-    }
-
-    void operator -= (Matrix& other) {
-        if (n != other.n || m != other.m)
-            std::cout << "CANNOT BE DONE. MATRIXES STRINGS OR COLLUMNS AREN'T EQUAL!" << std::endl;
-        else {
-            for (int i{ 0 }; i < n; i++) {
-                for (int j{ 0 }; j < m; j++)
-                    data[i][j] -= other.data[i][j];
-            }
-        }
-    }
-
-    bool operator == (Matrix& other) {
-        if (n != other.n || m != other.m)
-            std::cout << "CANNOT BE DONE. MATRIXES STRINGS OR COLLUMNS AREN'T EQUAL!" << std::endl;
-        else {
-            for (int i{ 0 }; i < n; i++) {
-                for (int j{ 0 }; j < m; j++) {
-                    if (data[i][j] != other.data[i][j])
-                        return false;
-                }
-            }
-            return true;
-        }
-    }
-
-    bool operator != (Matrix& other) {
-        if (n != other.n || m != other.m)
-            std::cout << "CANNOT BE DONE. MATRIXES STRINGS OR COLLUMNS AREN'T EQUAL!" << std::endl;
-        else {
-            for (int i{ 0 }; i < n; i++) {
-                for (int j{ 0 }; j < m; j++) {
-                    if (data[i][j] != other.data[i][j])
-                        return true;
-                }
-            }
-            return false;
-        }
-    }
-};
-    
-    
+}
 
 int main()
 {
     srand(time(NULL));
     setlocale(LC_ALL, "rus");
+   
+    Matrix f(5,5);
+    Matrix s(5,5);
+    std::cout << "Необходимо заполнить две матрицы элементами." << std::endl;
+    f.filling();
+    s.filling();
+    std::cout << "Ваши матрицы: " << std::endl;
+    f << " | ";
+    std::cout << std::endl;
+    s << " | ";
+    int choice{1};
+    std::cout << "Над ними доступны следующие операции: " << std::endl;
+    while (choice != 0) {
+        std::cout << "1 - Сложить матрицы." << std::endl;
+        std::cout << "2 - Вычесть матрицы." << std::endl;
+        std::cout << "3 - Умножить матрицы." << std::endl;
+        std::cout << "4 - Выбрать и изменить элемент в каждой из матриц." << std::endl;
+        std::cout << "0 - Выход." << std::endl;
+        std::cout << "Ваш выбор: ";
+        std::cin >> choice;
+        switch (choice) {
+        case 1: {
+            Matrix& sum = f + s;
+            std::cout << "Получившаяся матрица: " << std::endl;
+            sum << "  |  ";
+            delete& sum;
+            break;
+        }
+        case 2:
+            std::cout << "Из какой матрицы мы будем вычитать другую?" << std::endl;
+            std::cout << "1 - из первой вторую." << std::endl;
+            std::cout << "2 - из второй первую." << std::endl;
+            std::cout << "Ваш выбор: ";
+            std::cin >> choice;
+            switch (choice) {
+            case 1:
+                minus(f, s);
+                break;
+            case 2:
+                minus(s, f);
+                break;
+            default:
+                std::cout << "Неверно указано число. По умолчанию из первой матрицы вычтется вторая.";
+                minus(f, s);
+                break;
+            }
+            break;
 
-    Matrix m;
-    Matrix s;
-    m.filling();
-    m[3] = 3;
-    m << " ";
-    /*m[11];*/
-   // s.filling();
-   // Matrix& ms = m * s;
+        case 3: {
+            std::cout << "Какую матрицу на какую будем умножать?" << std::endl;
+            std::cout << "1 - первую на вторую." << std::endl;
+            std::cout << "2 - вторую на первую." << std::endl;
+            std::cout << "Ваш выбор: ";
+            std::cin >> choice;
+            switch (choice) {
+            case 1:
+                multiply(f, s);
+                break;
+            case 2:
+                multiply(s, f);
+                break;
+            default:
+                std::cout << "Неверно указано число. По умолчанию первая матрица умножится на вторую.";
+                multiply(f, s);
+                break;
+            }
+            break;
+        }
+        case 4: {
+            std::cout << "Выберите индекс элемента первой матрицы(0 - " << (f.getStr() * f.getRow()) - 1 << "): ";
+            unsigned int elem;
+            std::cin >> elem;
+            elemChanging(f, elem);
 
-   // std::cout << &ms << std::endl;
-   ///* ms << "|";*/
-   // delete &ms;
-  
+            std::cout << "Выберите индекс элемента второй матрицы(0 - " << (s.getStr() * s.getRow()) - 1 << "): ";
+            std::cin >> elem;
+            elemChanging(s, elem);
+            break;
+        }
+        case 0:
+            std::cout << "GOODBYE!" << std::endl;
+            break;
+        default:
+            std::cout << "GOODBYE!" << std::endl;
+            choice = 0;
+            break;
+        }
+    }
+    return 0;
 }
 
 
