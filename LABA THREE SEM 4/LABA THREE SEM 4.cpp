@@ -41,7 +41,6 @@ private:
 public:
     float GetVolume() { return volume; }
     void SetVolume(float volume) { this->volume = volume; }
-
     bool operator > (Shape3D& other) {
         if (volume > other.volume)
             return true;
@@ -68,11 +67,21 @@ class Square : public Shape2D {
 private:
     float side;
 public:
-    void CalculateArea() { std::cout << "Площадь квадрата: " << side * side << std::endl; }
+    void CalculateArea() {
+        std::cout << "Моя площадь: " << GetArea() << std::endl;
+    }
+    std::string GetName() { return "Mr Квадрат"; }
+    void ShowInfo() {
+        std::cout << "Я " << GetName() << std::endl;
+        CalculateArea();
+        std::cout << "Моя сторона - " << side << std::endl;
+    }
+    void Scale(float scaleFactor) {
+        side *= scaleFactor;
+        std::cout << "Сторона квадрата увеличена в " << scaleFactor << " раз." << std::endl;
+        SetArea(side * side);
+    }
 };
-
-
-
 
 class TriangularPyramide : public Shape3D {
 private:
@@ -81,11 +90,18 @@ private:
         float base;
         float height;
     public:
-        void CalculateArea() { 
+        Triangle() : base(10), height(5) {
             SetArea(0.5 * base * height);
+        }
+        Triangle(float base, float height) : base(base), height(height) {
+            SetArea(0.5 * base * height);
+        }
+        ~Triangle() { std::cout << "TRIANGLE DESTRUCTION!" << std::endl; }
+
+        void CalculateArea() { 
             std::cout << "Моя площадь: " << GetArea() << std::endl;
         }
-        std::string GetName() { return "Треугольник"; }
+        std::string GetName() { return "Mr Треугольник"; }
         void ShowInfo() {
             std::cout << "Я " << GetName() << std::endl;
             CalculateArea();
@@ -96,13 +112,21 @@ private:
             base *= scaleFactor;
             height *= scaleFactor;
             std::cout << "Элементы треугольника увеличены в " << scaleFactor << " раз." << std::endl;
-            /*std::cout << "Площадь увеличилась в " << scaleFactor * scaleFactor << " раз." << std::endl;*/
+            SetArea(0.5 * base * height);
         }
     };
     float height;
     Triangle triangle;
     
 public:
+    TriangularPyramide() : height(10) {
+        SetVolume((1 / 3) * height * triangle.GetArea());
+    }
+    TriangularPyramide(float height) : height(height) {
+        SetVolume((1 / 3) * height * triangle.GetArea());
+    }
+    ~TriangularPyramide() { std::cout << "TRIANGULAR PYRAMIDE DESTRUCTION!" << std::endl; }
+
     void CalculateVolume() {
         SetVolume((1 / 3) * height * triangle.GetArea());
         std::cout << "Мой объем: " << GetVolume() << std::endl;
@@ -112,15 +136,13 @@ public:
         std::cout << "Высота увеличена в " << scaleFactor << " раз." << std::endl;
         triangle.Scale(scaleFactor);
     };
-    virtual std::string GetName() { return "Треугольная пирамида"; }
+    virtual std::string GetName() { return "Mrs Треугольная пирамида"; }
     void ShowInfo() {
         std::cout << "Я " << GetName() << std::endl;
         CalculateVolume();
         std::cout << "Площадь моего основания - " << triangle.GetArea() << std::endl;
         std::cout << "Моя высота - " << height << std::endl;
     }
-    
-
 };
 
 class Cylinder : public Shape3D {
@@ -129,20 +151,87 @@ private:
     private:
         float radius;
     public:
-        void CalculateArea() { std::cout << "Площадь круга: " << 3.14 * radius * radius << std::endl; }
-    };
+        Circle() : radius(7) {
+            SetArea(3.14 * radius * radius);
+        }
+        Circle(float radius) : radius(radius) {
+            SetArea(3.14 * radius * radius);
+        }
+        ~Circle() { std::cout << "CIRCLE DESTRUCTION!" << std::endl; }
 
+        void CalculateArea() {
+            std::cout << "Моя площадь: " << GetArea() << std::endl;
+        }
+        std::string GetName() { return "Mr Круг"; }
+        void ShowInfo() {
+            std::cout << "Я " << GetName() << std::endl;
+            CalculateArea();
+            std::cout << "Мой радиус - " << radius << std::endl;
+        }
+        void Scale(float scaleFactor) {
+            radius *= scaleFactor;
+            std::cout << "Радиус круга увеличен в " << scaleFactor << " раз." << std::endl;
+            SetArea(3.14 * radius * radius);
+        }
+    };
     float height;
+    Circle circle;
+public:
+    Cylinder() : height(10) {
+        SetVolume(circle.GetArea() * height);
+    }
+    Cylinder(float height) : height(height) {
+        SetVolume(circle.GetArea() * height);
+    }
+    ~Cylinder() { std::cout << "CYLINDER DESTRUCTION!" << std::endl; }
+
+    void Scale(float scaleFactor) {
+        height *= scaleFactor;
+        std::cout << "Высота цилиндра увеличена в " << scaleFactor << " раз." << std::endl;
+        circle.Scale(scaleFactor);
+        SetVolume(circle.GetArea() * height);
+    };
+    std::string GetName() { return "Mr Цилиндр"; }
+    void CalculateVolume() {
+        std::cout << "Мой объем: " << GetVolume() << std::endl;
+    }
+    void ShowInfo() {
+        std::cout << "Я " << GetName() << std::endl;
+        CalculateVolume();
+        std::cout << "Моя высота - " << height << std::endl;
+    }
 };
 
 class Sphere : public Shape3D {
 private:
     float radius;
+public:
+    Sphere() : radius(30) {
+        SetVolume((4 / 3) * 3.14 * pow(radius, 3));
+    }
+    Sphere(float radius) : radius(radius) {
+        SetVolume((4 / 3) * 3.14 * pow(radius, 3));
+    }
+    ~Sphere() { std::cout << "SPHERE PYRAMIDE DESTRUCTION!" << std::endl; }
+    void Scale(float scaleFactor) {
+        radius *= scaleFactor;
+        std::cout << "Радиус сферы увеличен в " << scaleFactor << " раз." << std::endl;
+        SetVolume((4 / 3) * 3.14 * pow(radius, 3));
+    }
+    std::string GetName() { return "Ms Сфера"; }
+    void CalculateVolume() {
+        std::cout << "Мой объем: " << GetVolume() << std::endl;
+    }
+    void ShowInfo() {
+        std::cout << "Я " << GetName() << std::endl;
+        CalculateVolume();
+        std::cout << "Мой радиус - " << radius << std::endl;
+    }
 };
 
 int main()
 {
-    std::cout << "Hello World!\n";
+  
 }
 
 
