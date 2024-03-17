@@ -5,26 +5,11 @@ class Shape2D : public Shape {
 private:
     float area = 0;
 public:
-    float GetArea() { return area; }
-    void SetArea(float area) { this->area = area; }
+    float GetArea();
+    void SetArea(float area);
 
-    bool operator > (Shape2D& other) {
-        if (area > other.area)
-            return true;
-        else
-            return false;
-    }
-    bool operator < (Shape2D& other) {
-        if (area < other.area)
-            return true;
-        else
-            return false;
-    }
-    bool operator == (Shape2D& other) {
-        if (area == other.area)
-            return true;
-        else
-            return false;
-    }
+    bool operator > (Shape2D& other);
+    bool operator < (Shape2D& other);
+    bool operator == (Shape2D& other);
     virtual void CalculateArea() = 0;
 };

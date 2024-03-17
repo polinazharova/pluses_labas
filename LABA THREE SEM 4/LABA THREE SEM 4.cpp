@@ -2,6 +2,9 @@
 #include "TriangularPyramide.h"
 #include "Sphere.h"
 #include "Cylinder.h"
+#include "Shape.h"
+#include "Shape 2D.h"
+#include "Shape3D.h"
 
 void comparison2D(Shape2D& first, Shape2D& second) {
     unsigned int money;

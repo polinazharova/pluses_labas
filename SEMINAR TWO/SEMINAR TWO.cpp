@@ -13,7 +13,7 @@ void minus(Matrix& first, Matrix& second) {
     delete& subs;
 }
 void elemChanging(Matrix& matrix, unsigned int elem) {
-    unsigned int choice;
+    int choice;
     try {
         matrix[elem];
         std::cout << "Ваш элемент: " << matrix[elem] << std::endl;

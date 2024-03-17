@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "Shape 2D.h"
 #include "Shape3D.h"
 
@@ -9,7 +9,7 @@ private:
         float base;
         float height;
     public:
-        Triangle() : base(10), height(5) {
+        Triangle() : base(1 + rand() % 10), height(1 + rand() % 10) {
             SetArea(0.5 * base * height);
         }
         Triangle(float base, float height) : base(base), height(height) {
@@ -18,46 +18,30 @@ private:
         ~Triangle() {}
 
         void CalculateArea() {
-            std::cout << "Моя площадь - " << GetArea() << std::endl;
+            std::cout << "РњРѕСЏ РїР»РѕС‰Р°РґСЊ - " << GetArea() << std::endl;
         }
-        std::string GetName() { return "Mr Треугольник"; }
+        std::string GetName() { return "Mr РўСЂРµСѓРіРѕР»СЊРЅРёРє"; }
         void ShowInfo() {
-            std::cout << "Я " << GetName() << std::endl;
+            std::cout << "РЇ " << GetName() << std::endl;
             CalculateArea();
-            std::cout << "Мое основание - " << base << std::endl;
-            std::cout << "Моя высота - " << height << std::endl;
+            std::cout << "РњРѕРµ РѕСЃРЅРѕРІР°РЅРёРµ - " << base << std::endl;
+            std::cout << "РњРѕСЏ РІС‹СЃРѕС‚Р° - " << height << std::endl;
         }
         void Scale(float scaleFactor) {
             base *= scaleFactor;
             height *= scaleFactor;
-            std::cout << "Элементы треугольника увеличены в " << scaleFactor << " раз." << std::endl;
+            std::cout << "Р­Р»РµРјРµРЅС‚С‹ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° СѓРІРµР»РёС‡РµРЅС‹ РІ " << scaleFactor << " СЂР°Р·." << std::endl;
             SetArea(0.5 * base * height);
         }
     };
     float height;
 public:
     Triangle triangle;
-    TriangularPyramide() : height(10) {
-        SetVolume(0.333 * height * triangle.GetArea());
-    }
-    TriangularPyramide(float height) : height(height) {
-        SetVolume(0.333 * height * triangle.GetArea());
-    }
-    ~TriangularPyramide() {}
+    TriangularPyramide();
+    TriangularPyramide(float height);
 
-    void CalculateVolume() {
-        std::cout << "Мой объем - " << GetVolume() << std::endl;
-    }
-    void Scale(float scaleFactor) {
-        height *= scaleFactor;
-        std::cout << "Высота увеличена в " << scaleFactor << " раз." << std::endl;
-        triangle.Scale(scaleFactor);
-    };
-    virtual std::string GetName() { return "Mrs Треугольная пирамида"; }
-    void ShowInfo() {
-        std::cout << "Я " << GetName() << std::endl;
-        CalculateVolume();
-        std::cout << "Площадь моего основания - " << triangle.GetArea() << std::endl;
-        std::cout << "Моя высота - " << height << std::endl;
-    }
+    void CalculateVolume();
+    void Scale(float scaleFactor);
+    std::string GetName();
+    void ShowInfo();
 };

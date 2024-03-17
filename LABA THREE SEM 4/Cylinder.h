@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "Shape 2D.h"
 #include "Shape3D.h"
 
@@ -8,7 +8,7 @@ private:
     private:
         float radius;
     public:
-        Circle() : radius(7) {
+        Circle() : radius(1 + rand() % 15) {
             SetArea(3.14 * radius * radius);
         }
         Circle(float radius) : radius(radius) {
@@ -17,17 +17,17 @@ private:
         ~Circle() {}
 
         void CalculateArea() {
-            std::cout << "Моя площадь - " << GetArea() << std::endl;
+            std::cout << "РњРѕСЏ РїР»РѕС‰Р°РґСЊ - " << GetArea() << std::endl;
         }
-        std::string GetName() { return "Mr Круг"; }
+        std::string GetName() { return "Mr РљСЂСѓРі"; }
         void ShowInfo() {
-            std::cout << "Я " << GetName() << std::endl;
+            std::cout << "РЇ " << GetName() << std::endl;
             CalculateArea();
-            std::cout << "Мой радиус - " << radius << std::endl;
+            std::cout << "РњРѕР№ СЂР°РґРёСѓСЃ - " << radius << std::endl;
         }
         void Scale(float scaleFactor) {
             radius *= scaleFactor;
-            std::cout << "Радиус круга увеличен в " << scaleFactor << " раз." << std::endl;
+            std::cout << "Р Р°РґРёСѓСЃ РєСЂСѓРіР° СѓРІРµР»РёС‡РµРЅ РІ " << scaleFactor << " СЂР°Р·." << std::endl;
             SetArea(3.14 * radius * radius);
         }
     };
@@ -35,29 +35,12 @@ private:
 
 public:
     Circle circle;
-    Cylinder() : height(10) {
-        SetVolume(circle.GetArea() * height);
-    }
-    Cylinder(float height) : height(height) {
-        SetVolume(circle.GetArea() * height);
-    }
-    ~Cylinder() {}
+    Cylinder();
+    Cylinder(float height);
 
-    void Scale(float scaleFactor) {
-        height *= scaleFactor;
-        std::cout << "Высота цилиндра увеличена в " << scaleFactor << " раз." << std::endl;
-        circle.Scale(scaleFactor);
-        SetVolume(circle.GetArea() * height);
-    };
-    std::string GetName() { return "Mr Цилиндр"; }
-    void CalculateVolume() {
-        std::cout << "Мой объем - " << GetVolume() << std::endl;
-    }
-    void ShowInfo() {
-        std::cout << "Я " << GetName() << std::endl;
-        CalculateVolume();
-        std::cout << "Площадь моего основания - " << circle.GetArea() << std::endl;
-        std::cout << "Моя высота - " << height << std::endl;
-    }
+    void Scale(float scaleFactor);
+    std::string GetName();
+    void CalculateVolume();
+    void ShowInfo();
 };
 
