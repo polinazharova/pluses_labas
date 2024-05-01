@@ -9,41 +9,29 @@ private:
     int positionX1;
     int positionX2;
     int positionY;
-    int positionX1_prev{0};
-    int positionX2_prev{0};
-    int positionY_prev{0};
 public:
     int getX1() { return positionX1; }
     int getX2() { return positionX2; }
     int getY() { return positionY; }
-    int getPrevX1() { return positionX1_prev; }
-    int getPrevX2() { return positionX2_prev; }
-    int getPrevY() { return positionY_prev; }
 
     void setX1(int X1) {
-        if (X1 > 1 && X1 < 29)
+        if (X1 > 0 && X1 < 52)
             this->positionX1 = X1;
     }
     void setX2(int X2) {
-        if (X2 > 2 && X2 < 30)
+        if (X2 > 1 && X2 < 53)
             this->positionX2 = X2;
     }
     void setY(int Y) {
-        if (Y >= 1 && Y < 30)
+        if (Y > 0 && Y < 26)
             this->positionY = Y;
     }
-    void setPrevPos(int positionX1_prev, int positionX2_prev, int positionY_prev) {
-        this->positionX1_prev = positionX1_prev;
-        this->positionX2_prev = positionX2_prev;
-        this->positionY_prev = positionY_prev;
-    }
-
 };
 
 class Prey : public Character {
 public:
     Prey() {
-        setX1(10); setX2(11), setY(5);
+        setX1(14); setX2(15), setY(12);
     }
 
     void npcActing() {
@@ -65,11 +53,11 @@ private:
     Prey& prey;
 public:
     Predator(Prey& prey) : prey(prey) {
-        setX1(15); setX2(16), setY(9);
+        setX1(36); setX2(37), setY(12);
     }
 
     void npcActing() {
-        if (prey.getX1() != getX1() && prey.getX1() != getX2() && prey.getY() != getY()) {
+        if (prey.getX1() != getX1() && prey.getX1() != getX2() && prey.getX2() != getX1() && prey.getY() != getY()) {
             int temp = rand() % 2;
             switch (temp) {
             case 0: 
@@ -88,18 +76,18 @@ public:
                     setY((getY()) + 1);
             }
         }
-        else if (prey.getX1() == getX1() && prey.getX1() == getX2()) {
+        else if (prey.getX1() == getX1() || prey.getX1() == getX2() || prey.getX2() == getX1()) {
             if (prey.getY() < getY())
                 setY((getY()) - 1);
-            else
+            else if (prey.getY() > getY())
                 setY((getY()) + 1);
         }
-        else {
+        else if (prey.getY() == getY()) {
             if (prey.getX1() < getX1()) {
                 setX1((getX1()) - 1);
                 setX2((getX2()) - 1);
             }
-            else {
+            else if (prey.getX1() > getX1()) {
                 setX1((getX1()) + 1);
                 setX2((getX2()) + 1);
             }
@@ -173,8 +161,10 @@ public:
     }
 
     bool ifGameisOver() {
-        if ((*prey).getX1() == (*pred).getX1() || (*prey).getY() == (*pred).getY())
+        if (((*prey).getX1() == (*pred).getX1() || (*prey).getX1() == (*pred).getX2() || (*prey).getX2() == (*pred).getX1()) && (*prey).getY() == (*pred).getY())
             return true;
+        else
+            return false;
     }
 };
 
@@ -186,70 +176,136 @@ public:
     Point2D(Predator& pred, Prey& prey) : prey(prey), pred(pred) {}
 
     void playerPreyActing() {
-        int hit = _getch();
-        std::cout << hit << '\n';
-        switch (hit) {
-        case 119: //W
-            prey.setY(prey.getY() - 1);
-            break;
-        case 115: //S
-            prey.setY(prey.getY() + 1);
-            break;
-        case 97: //A
-            prey.setX1(prey.getX1() - 1);
-            prey.setX2(prey.getX2() - 1);
-            break;
-        case 100: //D
-            prey.setX1(prey.getX1() + 1);
-            prey.setX2(prey.getX2() + 1);
-            break;
-        case 101: //E
-            prey.setY(prey.getY() - 1);
-            prey.setX1(prey.getX1() + 1);
-            prey.setX2(prey.getX2() + 1);
-            break;
-        case 113: //Q
-            prey.setY(prey.getY() - 1);
-            prey.setX1(prey.getX1() - 1);
-            prey.setX2(prey.getX2() - 1);
-            break;
-        case 99: //C
-            prey.setY(prey.getY() + 1);
-            prey.setX1(prey.getX1() + 1);
-            prey.setX2(prey.getX2() + 1);
-            break;
-        case 122: //Z
-            prey.setY(prey.getY() + 1);
-            prey.setX1(prey.getX1() - 1);
-            prey.setX2(prey.getX2() - 1);
-            break;
+        bool is_wrong_key = true;
+        while (is_wrong_key) {
+            int hit = _getch();
+            switch (hit) {
+            case 119: //W
+                is_wrong_key = false;
+                prey.setY(prey.getY() - 1);
+                break;
+            case 115: //S
+                is_wrong_key = false;
+                prey.setY(prey.getY() + 1);
+                break;
+            case 97: //A
+                is_wrong_key = false;
+                prey.setX1(prey.getX1() - 1);
+                prey.setX2(prey.getX2() - 1);
+                break;
+            case 100: //D
+                is_wrong_key = false;
+                prey.setX1(prey.getX1() + 1);
+                prey.setX2(prey.getX2() + 1);
+                break;
+            case 101: //E
+                is_wrong_key = false;
+                prey.setY(prey.getY() - 1);
+                prey.setX1(prey.getX1() + 1);
+                prey.setX2(prey.getX2() + 1);
+                break;
+            case 113: //Q
+                is_wrong_key = false;
+                prey.setY(prey.getY() - 1);
+                prey.setX1(prey.getX1() - 1);
+                prey.setX2(prey.getX2() - 1);
+                break;
+            case 99: //C
+                prey.setY(prey.getY() + 1);
+                prey.setX1(prey.getX1() + 1);
+                prey.setX2(prey.getX2() + 1);
+                break;
+            case 122: //Z
+                is_wrong_key = false;
+                prey.setY(prey.getY() + 1);
+                prey.setX1(prey.getX1() - 1);
+                prey.setX2(prey.getX2() - 1);
+                break;
+            default:
+                std::cout << "Неверно нажатая клавиша." << std::endl;
+                break;
+            }
+            
         }
     }
 
     void playerPredActing() {
-        int hit = _getch();
-        std::cout << hit << '\n';
-        switch (hit) {
-        case 119: //W
-            pred.setY(pred.getY() - 1);
-            break;
-        case 115: //S
-            pred.setY(pred.getY() + 1);
-            break;
-        case 97: //A
-            pred.setX1(pred.getX1() - 1);
-            pred.setX2(pred.getX2() - 1);
-            break;
-        case 100: //D
-            pred.setX1(pred.getX1() + 1);
-            pred.setX2(pred.getX2() + 1);
-            break;
+        bool is_wrong_key = true;
+        while (is_wrong_key) {
+            int hit = _getch();
+            switch (hit) {
+            case 119: //W
+                is_wrong_key = false;
+                pred.setY(pred.getY() - 1);
+                break;
+            case 115: //S
+                is_wrong_key = false;
+                pred.setY(pred.getY() + 1);
+                break;
+            case 97: //A
+                is_wrong_key = false;
+                pred.setX1(pred.getX1() - 1);
+                pred.setX2(pred.getX2() - 1);
+                break;
+            case 100: //D
+                is_wrong_key = false;
+                pred.setX1(pred.getX1() + 1);
+                pred.setX2(pred.getX2() + 1);
+                break;
+            default:
+                std::cout << "Неверно нажатая клавиша." << std::endl;
+                break;
+            }
         }
     }
 
 
 };
 
+
+void lost() {
+    std::string lost = R"(::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::
+::       ___           __    ___  __  _____  _  ::
+::/\_/\ /___\/\ /\    / /   /___\/ _\/__   \/ \ ::
+::\_ _///  // / \ \  / /   //  //\ \   / /\/  / ::
+:: / \/ \_//\ \_/ / / /___/ \_// _\ \ / / /\_/  ::
+:: \_/\___/  \___/  \____/\___/  \__/ \/  \/    ::
+::                                              ::
+::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::)";
+
+    for (int i{ 0 }; i < lost.size(); i++) {
+        if (lost[i] == '\n') {
+            Sleep(10);
+        }
+        Sleep(1);
+        std::cout << lost[i];
+    }
+}
+
+void won() {
+    std::string won = R"( /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\ 
+( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )
+ > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ < 
+ /\_/\                                            /\_/\ 
+( o.o )  __   __ __  _  _   _   _  __  __  _ _   ( o.o )
+ > ^ <   \ `v' //__\| || | | | | |/__\|  \| / \   > ^ < 
+ /\_/\    `. .'| \/ | \/ | | 'V' | \/ | | ' \_/   /\_/\ 
+( o.o )    !_!  \__/ \__/  !_/ \_!\__/|_|\__(_)  ( o.o )
+ > ^ <                                            > ^ < 
+ /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\ 
+( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )
+ > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ < )";
+
+    for (int i{ 0 }; i < won.size(); i++) {
+        if (won[i] == '\n') {
+            Sleep(10);
+        }
+        Sleep(1);
+        std::cout << won[i];
+    }
+}
 
 int main()
 {
@@ -280,133 +336,171 @@ __   ___________________________________________________________   __
         system("cls");
     }
 
-
     Prey prey;
     Predator pr(prey);
     Arena ar(&pr, &prey);
     Point2D ddd(pr, prey);
-    ar.setPredatorOnArena();
-    ar.setPreyOnArena();
-    ar.arenaShow();
 
-    std::cout << "Выберите кол-во ходов: 1, 2, 3 (нажмите клавишу)\n";
-    int hit = _getch();
-    switch (hit) {
-    case 49: //1
-        std::cout << "ХОДИТЕ!\n";
-        ddd.playerPredActing();
-        system("cls");
-        ar.setPredatorOnArena();
-        ar.setPreyOnArena();
-        ar.arenaShow();
-        break;
-    case 50: //2
-        for (int i{ 0 }; i < 2; i++) {
-            std::cout << "ХОДИТЕ!\n";
-            ddd.playerPredActing();
+    std::cout << "                                     Cправка:\n";
+    std::cout << "                                     Клавиши управления: W,A,S,D,Z,C,Q,E.\n";
+    std::cout << "                                     ** - жертва, () - хищник.\n";
+
+    while (true) {
+        std::cout << "\n\n\n\n\n\n\n\n\n                                     За кого вы хотите играть?\n                                     1 - хищник, 2 - жертва" << std::endl;
+        std::cout << "                                     0 - ВЫХОД.\n";
+        std::cout << "                                     Ваш выбор: ";
+        int choice;
+        std::cin >> choice;
+        switch (choice) {
+        case 1: {
+            int steps = 30;
+            while (true) {
+                system("cls");
+                std::cout << "Осталось шагов: " << steps << std::endl;
+
+                ar.setPredatorOnArena();
+                ar.setPreyOnArena();
+                ar.arenaShow();
+
+                if (ar.ifGameisOver()) {
+                    system("cls");
+                    won();
+                    system("cls");
+                    break;
+                }
+
+                if (steps == 0) {
+                    system("cls");
+                    lost();
+                    system("cls");
+                    break;
+                }
+                std::cout << "Выберите кол-во ходов: 1, 2, 3 (нажмите клавишу)\n";
+                int hit = _getch();
+                bool are_wrong_steps = true;
+                while (are_wrong_steps) {
+                    int hit = _getch();
+                    switch (hit) {
+                    case 49: //1
+                        are_wrong_steps = false;
+                        std::cout << "ХОДИТЕ!\n";
+                        ddd.playerPredActing();
+                        system("cls");
+                        ar.setPredatorOnArena();
+                        ar.setPreyOnArena();
+                        ar.arenaShow();
+                        break;
+                    case 50: //2
+                        are_wrong_steps = false;
+                        for (int i{ 0 }; i < 2; i++) {
+                            std::cout << "ХОДИТЕ!\n";
+                            ddd.playerPredActing();
+                            system("cls");
+                            ar.setPredatorOnArena();
+                            ar.setPreyOnArena();
+                            std::cout << "Осталось шагов хищника: " << 1 - i << std::endl;
+                            ar.arenaShow();
+                        }
+                        break;
+                    case 51: //3
+                        are_wrong_steps = false;
+                        for (int i{ 0 }; i < 3; i++) {
+                            std::cout << "ХОДИТЕ!\n";
+                            ddd.playerPredActing();
+                            system("cls");
+                            ar.setPredatorOnArena();
+                            ar.setPreyOnArena();
+                            std::cout << "Осталось шагов хищника: " << 2 - i << std::endl;
+                            ar.arenaShow();
+                        }
+                        break;
+                    default:
+                        std::cout << "Неверно нажатая клавиша." << std::endl;
+                        break;
+                    }
+                }
+
+                if (ar.ifGameisOver()) {
+                    system("cls");
+                    won();
+                    system("cls");
+                    break;
+                }
+
+                prey.npcActing();
+                steps--;
+            }
+            break;
+        }
+        case 2: {
+            int steps = 30;
+            while (true) {
+                system("cls");
+
+                std::cout << "Осталось шагов: " << steps << std::endl;
+                ar.setPredatorOnArena();
+                ar.setPreyOnArena();
+                ar.arenaShow();
+
+                if (ar.ifGameisOver()) {
+                    system("cls");
+                    lost();
+                    break;
+                }
+
+                if (steps == 0) {
+                    system("cls");
+                    won();
+                    break;
+                }
+
+                std::cout << "ХОДИТЕ!\n";
+                pr.npcActing();
+                ddd.playerPreyActing();
+                steps--;
+            }
+            break;
+        }
+        case 0: {
             system("cls");
-            ar.setPredatorOnArena();
-            ar.setPreyOnArena();
-            ar.arenaShow();
-        }
-        break;
-    case 51: //3
-        for (int i{ 0 }; i < 3; i++) {
-            std::cout << "ХОДИТЕ!\n";
-            ddd.playerPredActing();
+            std::string game_over = R"(__| |__________________________________________________________________| |__
+__   __________________________________________________________________   __
+  | |                                                                  | |  
+  | |  ______        ______  _______     _____  _    _ _______ ______  | |  
+  | | / _____)  /\  |  ___ \(_______)   / ___ \| |  | (_______|_____ \ | |  
+  | || /  ___  /  \ | | _ | |_____     | |   | | |  | |_____   _____) )| |  
+  | || | (___)/ /\ \| || || |  ___)    | |   | |\ \/ /|  ___) (_____ ( | |  
+  | || \____/| |__| | || || | |_____   | |___| | \  / | |_____      | || |  
+  | | \_____/|______|_||_||_|_______)   \_____/   \/  |_______)     |_|| |  
+__| |__________________________________________________________________| |__
+__   __________________________________________________________________   __
+  | |                                                                  | |  )";
+            for (int i{ 0 }; i < game_over.size(); i++) {
+                if (game_over[i] == '\n') {
+                    Sleep(10);
+                }
+                std::cout << game_over[i];
+            }
             system("cls");
-            ar.setPredatorOnArena();
-            ar.setPreyOnArena();
-            ar.arenaShow();
+            for (int i{ 0 }; i < 3; i++) {
+                std::cout << game_over << std::endl;
+                Sleep(500);
+                system("cls");
+            }
+            return 0;
+            break;
         }
-        break;
-    }
-
-
-    ar.setPredatorOnArena();
-    ar.setPreyOnArena();
-    ar.arenaShow();
-    ddd.playerPreyActing();
-    pr.npcActing();
-    system("cls");
-    Sleep(0);
-    ar.setPredatorOnArena();
-    ar.setPreyOnArena();
-    ar.arenaShow();
-    ddd.playerPreyActing();
-    pr.npcActing();
-    system("cls");
-    Sleep(0);
-    ar.setPredatorOnArena();
-    ar.setPreyOnArena();
-    ar.arenaShow();
-    ddd.playerPreyActing();
-    pr.npcActing();
-    ar.setPredatorOnArena();
-    ar.setPreyOnArena();
-    ar.arenaShow();
-    ddd.playerPreyActing();
-    pr.npcActing();
-    ar.setPredatorOnArena();
-    ar.setPreyOnArena();
-    ar.arenaShow();
-    ddd.playerPreyActing();
-    pr.npcActing();
-    ar.setPredatorOnArena();
-    ar.setPreyOnArena();
-    ar.arenaShow();
-    ddd.playerPreyActing();
-    pr.npcActing();
-    ar.setPredatorOnArena();
-    ar.setPreyOnArena();
-    ar.arenaShow();
-    ddd.playerPreyActing();
-    pr.npcActing();
-    ar.setPredatorOnArena();
-    ar.setPreyOnArena();
-    ar.arenaShow();
-    ddd.playerPreyActing();
-    pr.npcActing();
-    ar.setPredatorOnArena();
-    ar.setPreyOnArena();
-    ar.arenaShow();
-
-
-    /*ddd.playerPreyActing();*/
-    /*while (ar.ifGameisOver()) {
-        pr.npcActing();
-        ddd.playerPreyActing();
-        ar.setPredatorOnArena();
-        ar.setPreyOnArena();
-        ar.arenaShow();
-        Sleep(1000);
-        system("cls");
-        Sleep(1000);
-        
-    }*/
-   
-    std::string lost = R"(::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::::
-::       ___           __    ___  __  _____  _  ::
-::/\_/\ /___\/\ /\    / /   /___\/ _\/__   \/ \ ::
-::\_ _///  // / \ \  / /   //  //\ \   / /\/  / ::
-:: / \/ \_//\ \_/ / / /___/ \_// _\ \ / / /\_/  ::
-:: \_/\___/  \___/  \____/\___/  \__/ \/  \/    ::
-::                                              ::
-::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::::)";
-
-    for (int i{ 0 }; i < lost.size(); i++) {
-        if (lost[i] == '\n') {
-            Sleep(10);
+        default: 
+            system("cls");
+            std::cout << "\n\n\n\n\n\n\n\n\n                                     Некорректный выбор...\n";
+            std::cout << "                                     За кого вы хотите играть?\n                                     1 - хищник, 2 - жертва" << std::endl;
+            std::cout << "                                     0 - ВЫХОД.\n";
+            std::cout << "                                     Ваш выбор: ";
+            std::cin >> choice;
+            break;
         }
-        Sleep(1);
-        std::cout << lost[i];
-    }
- 
-
-
    
+    }
     return 0;
 }
 
